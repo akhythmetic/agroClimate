@@ -9,39 +9,51 @@ body {
  
  /* Header et barre de recherche */
  header {
-    background-color: #d4c8b3;
+    background-color: #E3DCD2;
     padding: 15px;
     text-align: center;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: flex-start; /* Aligne les éléments en haut */
+    justify-content: flex-start; /* Aligne les éléments à gauche */
  }
  
  header input[type="text"] {
-    border: none;
-    border-radius: 20px;
-    padding: 8px 16px;
-    width: 200px;
-    outline: none;
-    font-size: 1em;
-    margin-bottom: 10px;
- }
+   border: none;
+   border-radius: 20px;
+   padding: 8px 16px;
+   width: 200px;
+   outline: none;
+   font-size: 1em;
+   margin-bottom: 10px;
+   background-color: rgba(204, 139, 101, 0.5);;
+}
  
  /* Titre principal */
  h1 {
     font-size: 2.5em; /* Ajuste la taille de la police selon tes préférences */
     color: #4d4d4d;
-    background-color: #e0e0e0;
+    background-color: rgba(255, 255, 255, 0.8); /* 0.8 pour 80% d'opacité */
     padding: 20px 30px;
     border-radius: 10px;
     text-align: center;
     display: inline-block;
     margin-top: 15px;
+    margin-right : 15px;
     font-weight: bold;
     font-family: 'Arial', sans-serif;
     text-transform: uppercase; /* Majuscules comme dans la maquette */
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour effet de relief */
     border: 3px solid #d4c8b3; /* Bordure autour du titre */
+    width: 900px;
+    margin-left : 20px;
  }
- 
+ .aligned-section {
+   display: flex;
+   align-items: center; /* Centre les éléments verticalement si les hauteurs diffèrent */
+   gap: 20px; /* Espace entre les éléments */
+   margin-top: 20px;
+}
  /* Texte d'introduction */
  .intro-text {
     font-style: italic;
@@ -105,7 +117,7 @@ body {
  
  /* Images de contenu */
  .content-image {
-    width: 100%;
+    width: 400px;
     max-width: 700px;
     border-radius: 8px;
     margin: 20px 0;
@@ -113,13 +125,22 @@ body {
     margin-left: auto;
     margin-right: auto;
  }
+ .additional-image {
+   width: 200px;
+   max-width: 700px;
+   border-radius: 8px;
+   margin: 20px 0;
+   display: block;
+   margin-left: auto;
+   margin-right: auto;
+}
  
  /* Texte de conclusion */
  .conclusion-text {
     font-weight: bold;
     text-align: center;
     margin-top: 20px;
-    color: #4d4d4d;
+    color: #7F2F2F;
     font-size: 1.2em;
  }
  
@@ -128,7 +149,7 @@ body {
     position: fixed;
     top: 10px;
     right: 10px;
-    background-color: #f0f0e0;
+    background-color: rgba(204, 139, 101, 0.5);;
     padding: 10px 15px;
     border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
