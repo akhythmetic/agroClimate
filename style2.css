@@ -1,0 +1,157 @@
+/* Style global de la page */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f3f0eb;
+    color: #333;
+    margin: 0;
+    padding: 0;
+ }
+ 
+ /* Header et barre de recherche */
+ header {
+    background-color: #d4c8b3;
+    padding: 15px;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
+ 
+ header input[type="text"] {
+    border: none;
+    border-radius: 20px;
+    padding: 8px 16px;
+    width: 200px;
+    outline: none;
+    font-size: 1em;
+    margin-bottom: 10px;
+ }
+ 
+ /* Titre principal */
+ h1 {
+    font-size: 2.5em; /* Ajuste la taille de la police selon tes préférences */
+    color: #4d4d4d;
+    background-color: #e0e0e0;
+    padding: 20px 30px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+    margin-top: 15px;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    text-transform: uppercase; /* Majuscules comme dans la maquette */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour effet de relief */
+    border: 3px solid #d4c8b3; /* Bordure autour du titre */
+ }
+ 
+ /* Texte d'introduction */
+ .intro-text {
+    font-style: italic;
+    text-align: center;
+    margin-top: 20px;
+    color: #4a4a4a;
+ }
+ 
+ /* Section principale */
+ .main-content {
+    padding: 20px;
+    max-width: 800px;
+    margin: auto;
+    background-color: #ffffff;
+ }
+ 
+ /* Boutons */
+ .buttons-section {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 20px;
+ }
+ 
+ .button {
+    background-color: #5e8b7e;
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: left;
+    border-radius: 8px;
+    font-size: 1em;
+    cursor: pointer;
+    width: 200px;
+    display: block;
+ }
+ 
+ .button:hover {
+    background-color: #4d766a;
+ }
+ 
+ /* Paragraphe principal */
+ .main-paragraph, .final-paragraph {
+    font-size: 1.1em;
+    margin-top: 20px;
+    line-height: 1.6;
+    color: #4a4a4a;
+ }
+ 
+ /* Texte en surbrillance (blockquote) */
+ .highlight-text {
+    font-style: italic;
+    color: #555555;
+    background-color: #f0f0f0;
+    padding: 10px;
+    border-left: 5px solid #d4c8b3;
+    margin: 20px 0;
+    font-size: 1.1em;
+ }
+ 
+ /* Images de contenu */
+ .content-image {
+    width: 100%;
+    max-width: 700px;
+    border-radius: 8px;
+    margin: 20px 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+ 
+ /* Texte de conclusion */
+ .conclusion-text {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #4d4d4d;
+    font-size: 1.2em;
+ }
+ 
+ /* Sidebar */
+ .sidebar {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    background-color: #f0f0e0;
+    padding: 10px 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ }
+ 
+ .sidebar a {
+    text-decoration: none;
+    color: #5a4e3b;
+    margin: 5px 0;
+    font-size: 1em;
+    display: block;
+ }
+ 
+ .sidebar a:hover {
+    color: #4a3e2b;
+ }
+ 
+ /* Footer */
+ footer {
+    text-align: center;
+    padding: 10px;
+    font-size: 0.9em;
+    color: #8c8c8c;
+    background-color: #d4c8b3;
+    margin-top: 20px;
+ }
