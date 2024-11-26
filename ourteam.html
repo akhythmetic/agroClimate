@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notre Équipe</title>
+    <link rel="stylesheet" href="style2.css">
+    <link rel="icon" href="photos/logosite.png" type="image/png">
+</head>
+<body>
+    <header>
+        <form id="search-form">
+            <input type="text" id="searchInput" placeholder="Search..." aria-label="Barre de recherche">
+         </form>
+       <h1>NOTRE ÉQUIPE</h1>
+    </header>
+
+    <section class="main-content">
+
+        <section class="intro-team">
+            <p class="intro-text">
+                Notre équipe est composée de professionnels passionnés, chacun apportant une expertise unique pour comprendre et relever les défis posés par le changement climatique sur l'agriculture. Ensemble, nous œuvrons pour proposer des solutions innovantes et durables.
+            </p>
+        </section>
+        
+        <div class="team-member">
+            <img src="photos/sarahdup.jpg" alt="Photo de membre 1" class="member-photo">
+            <h2>Dr. Sarah Dupont</h2>
+            <p class="role">Spécialiste en Sciences de l'Environnement </p>
+            <p class="bio">
+            Sarah étudie les impacts du changement climatique sur les écosystèmes agricoles depuis plus de 10 ans. Elle est experte dans les solutions de conservation des sols et d’adaptation agricole.</p>
+        </div>
+
+        <div class="team-member">
+            <img src="photos/jeanleroy.jpg" alt="Photo de membre 2" class="member-photo">
+            <h2>Jean Leroy</h2>
+            <p class="role">Agronome et Analyste de Données</p>
+            <p class="bio">Jean est spécialisé en agronomie et analyse de données climatiques pour prédire les rendements agricoles et élaborer des stratégies durables.</p>
+        </div>
+
+
+        <div class="team-member">
+
+            <img src="photos/emmabern.jpg" alt="Photo de membre 3" class="member-photo">
+            <h2>Emma Bernard</h2>
+            <p class="role">Économiste Environnementale</p>
+            <p class="bio">Emma analyse les impacts économiques des changements climatiques sur les petites exploitations et propose des solutions économiques viables pour une agriculture durable.</p>
+        </div>
+
+        <section class="assistance">
+            <h2>Assistance et Contact</h2>
+            <p>Vous avez des questions ou besoin d'aide ? Notre équipe est là pour vous aider.</p>
+            <p>Contactez-nous par e-mail à : <a href="mailto:assistance@agroteam.com">assistance@agroteam.com</a></p>
+            <p>Nous répondons généralement sous 24 à 48 heures.</p>
+        </section>
+
+        <a href="index2.html" class="button">Retour à l'accueil</a>
+    </section>
+
+    
+
+    <footer>
+        <p>© 2024 - Tous droits réservés</p>
+    </footer>
+
+
+    <script>
+        // Script JavaScript pour gérer la recherche
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Empêche le rechargement de la page
+    
+            // Récupère la valeur de l'entrée utilisateur
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+    
+            // page d'accueil
+            if (query === "accueil"){
+                window.location.href = "index2.php"; 
+             }
+             
+          // page d'actualité
+        if (query === "actualité" || query === "actualités" || query === "actualites"|| query === "actualite") {
+            window.location.href = "actualites.html"; 
+        } 
+  
+          //page d'analyses
+          if (query === "analyse" || query === "analyses") {
+              window.location.href = "analyse.html"; 
+          } 
+  
+          //page d'illustrations
+          if (query === "illustrations" || query === "illustration" || query === "visualisations" || query === "visualisation") {
+              window.location.href = "illustrations.html";
+          } 
+  
+          //page de connexion
+          if (query === "connexion" || query === "client" || query === "inscription") {
+              window.location.href = "connexion.php"; 
+          } 
+  
+          //page d'interviews
+          if (query === "interview" || query === "interviews") {
+              window.location.href = "interviews.html"; 
+          } else {
+              alert("Aucune page correspondante trouvée !"); 
+          }
+        });
+    </script>
+
+</body>
+</html>

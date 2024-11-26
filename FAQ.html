@@ -8,7 +8,7 @@
 
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-   <title>Interviews et Témoignages</title>
+   <title>FAQ - L'impact du changement climatique sur l'agriculture</title>
 
    <link rel="stylesheet" href="style2.css">
    <link rel="icon" href="photos/logosite.png" type="image/png">
@@ -23,53 +23,57 @@
         <input type="text" id="searchInput" placeholder="Search..." aria-label="Barre de recherche">
      </form>
 
-       <h1>INTERVIEWS ET TÉMOIGNAGES</h1>
+       <h1>FAQ - L'impact du changement climatique sur l'agriculture</h1>
 
    </header>
 
 
-   <section class="main-content">
+   <section class="faq-section">
 
-      <!-- Jean-Pierre Martin, Éleveur dans le Sud-Ouest -->
+       <div class="faq-item">
 
-      <div class="interview-section">
+           <h2>1. Comment le changement climatique affecte-t-il les rendements agricoles ?</h2>
 
-         <h2>Jean-Pierre Martin, Éleveur dans le Sud-Ouest</h2>
+       </div>
 
-         <p>Le changement climatique a un impact direct sur la santé de nos animaux.
+       <div class="faq-item">
 
-         Les vagues de chaleur rendent nos vaches plus sensibles aux maladies. Nous avons investi dans des abris climatisés pour améliorer leur confort. Je suis également en train de revoir notre système d'alimentation pour m'assurer qu'elles reçoivent tous
- les nutriments nécessaires, même en période de stress climatique.</p>
+           <h2>2. Quels types de cultures sont les plus vulnérables au changement climatique ?</h2>
 
-         <img src="photos/Sud Ouest agr.jpg" alt="Jean-Pierre Martin" class="content-image">
+       </div>
 
-      </div>
+       <div class="faq-item">
 
+           <h2>3. Quelles sont les solutions pour adapter l'agriculture aux effets du changement climatique ?</h2>
 
-      <!-- Dr. Sophie Lefèvre, Chercheuse en Agronomie -->
+       </div>
 
-      <div class="interview-section">
+       <div class="faq-item">
 
-         <h2>Dr. Sophie Lefèvre, Chercheuse en Agronomie</h2>
+           <h2>4. Les agriculteurs peuvent-ils se préparer aux vagues de chaleur et aux sécheresses ?</h2>
 
-         <p>Mon équipe et moi étudions les impacts du changement climatique sur les rendements agricoles dans plusieurs régions. Nos recherches montrent que certaines cultures sont particulièrement vulnérables à des températures élevées. Il est crucial d'informer
- les agriculteurs sur les meilleures pratiques de culture et les variétés de plantes résistantes aux conditions climatiques changeantes.</p>
+       </div>
 
-         <div class="image-paragraph">
+       <div class="faq-item">
 
-            <img src="photos/Dr Sophie.jpg" alt="Dr. Sophie Lefèvre" class="content-image">
+           <h2>5. L'agriculture peut-elle contribuer à la lutte contre le changement climatique ?</h2>
 
-            <p class="highlight-text">“L'agriculture est la première industrie mondiale, mais elle est aussi la plus vulnérable au changement climatique.”</p>
+       </div>
 
-         </div>
+       <div class="faq-item">
 
-      </div>
+           <h2>6. Quels sont les impacts du changement climatique sur l'élevage ?</h2>
 
-    <a href="index2.html" class="button">Retour à l'accueil</a>
+       </div>
+
+       <div class="faq-item">
+
+           <h2>7. Comment les politiques agricoles peuvent-elles soutenir l'adaptation au changement climatique ?</h2>
+
+       </div>
+       
+       <a href="index2.html" class="button">Retour à l'accueil</a>
    </section>
-
-
-   
 
 
    <footer>
@@ -77,6 +81,7 @@
        <p>© 2024 - Tous droits réservés</p>
 
    </footer>
+
    <script>
     // Script JavaScript pour gérer la recherche
     document.getElementById('search-form').addEventListener('submit', function(event) {
@@ -109,10 +114,17 @@
             window.location.href = "connexion.php"; 
         } 
 
+        //page d'interviews
+        if (query === "interview" || query === "interviews") {
+            window.location.href = "interviews.html"; 
+        } 
+        
         //page d'accueil
-        if (query === "accueil" ) {
-            window.location.href = "index2.php"; 
-        } else {
+        if (query === "accueil") {
+            window.location.href = "index2.html"; 
+        } 
+
+        else {
             alert("Aucune page correspondante trouvée !"); 
         }
 
@@ -120,6 +132,7 @@
     });
 
 </script>
+   
 </body>
 
 </html>

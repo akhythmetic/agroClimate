@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Connexion</title>
+    <title>Inscription Client</title>
     <link rel="stylesheet" href="style2.css">
 </head>
 <body>
@@ -13,48 +13,47 @@
             <button id="searchButton">🔍</button>
         </div>
     </header>
-    
+
     <main class="login-container">
-        <h1 class="login-title">DÉJÀ CLIENT ?</h1>
+        <h1 class="login-title">CRÉER UN COMPTE CLIENT</h1>
         <div class="login-form">
-            <div class="login-avatar">
-                <img src="photos/tete_connexion.jpg" alt="Avatar" class="avatar-image">
-            </div>
-            <form>
-                <label for="identifiant">Identifiant :</label>
-                <input type="text" id="identifiant" name="identifiant" placeholder="Entrez votre identifiant" required>
-                
-                <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
-                
-                <div class="options">
-                    <label>
-                        <input type="checkbox" name="remember"> Se souvenir de moi
-                    </label>
-                    <a href="#" class="forgot-password">Mot de passe oublié</a>
-                </div>
-                <div class="connexion-footer">
-                    <p>Pas de compte ? <a href="inscription.php">Inscris-toi ici</a></p>
-                </div>
-                <button type="submit" class="login-button">Se connecter</button>
+            <form action="enregistrement.php" method="post">
+                <label for="n">Nom :</label>
+                <input type="text" id="n" name="n" value="" placeholder="Entrez votre nom" required>
+
+                <label for="p">Prénom :</label>
+                <input type="text" id="p" name="p" value="" placeholder="Entrez votre prénom" required>
+
+                <label for="adr">Adresse :</label>
+                <input type="text" id="adr" name="adr" value="" placeholder="Entrez votre adresse" required>
+
+                <label for="num">Numéro de téléphone :</label>
+                <input type="text" id="num" name="num" value="" placeholder="Entrez votre numéro de téléphone" required>
+
+                <label for="mail">Adresse e-mail :</label>
+                <input type="email" id="mail" name="mail" value="" placeholder="Entrez votre e-mail" required>
+
+                <label for="mdp1">Mot de passe :</label>
+                <input type="password" id="mdp1" name="mdp1" placeholder="Choisissez un mot de passe" required>
+
+                <label for="mdp2">Confirmer votre mot de passe :</label>
+                <input type="password" id="mdp2" name="mdp2" placeholder="Confirmez votre mot de passe" required>
+
+                <button type="submit" class="login-button">S'inscrire</button>
             </form>
         </div>
     </main>
-    <a href="index2.html" class="button">Retour à l'accueil</a>
     <footer>
         <p>© 2024 - Tous droits réservés</p>
     </footer>
-    
+
     <script>
-        // Sélectionne les éléments de la recherche
+        // Fonction de recherche
         const searchInput = document.getElementById('searchInput');
         const searchButton = document.getElementById('searchButton');
 
-        // Fonction de gestion de la recherche
         searchButton.addEventListener('click', function() {
             const query = searchInput.value.trim().toLowerCase();
-
-            // Liste des mots-clés et pages correspondantes
             const routes = {
                 "actualité": "actualites.html",
                 "actualités": "actualites.html",
@@ -70,20 +69,17 @@
                 "illustrations": "illustrations.html",
                 "visualisation": "illustrations.html",
                 "visualisations": "illustrations.html",
-                "accueil": "index2.html",
+                "accueil": "index2.php",
                 "interview": "interviews.html",
                 "interviews": "interviews.html"
             };
-
-            // Vérifie si la requête correspond à une route
             if (routes[query]) {
-                window.location.href = routes[query]; // Redirection
+                window.location.href = routes[query];
             } else {
                 alert("Aucune page correspondante trouvée !");
             }
         });
 
-        // Permet d'utiliser la touche Entrée pour effectuer une recherche
         searchInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 searchButton.click();

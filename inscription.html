@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription</title>
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <header>
+        <div class="search-bar">
+            <input type="text" placeholder="Rechercher...">
+            <button>🔍</button>
+        </div>
+    </header>
+
+    <div class="inscription-container">
+        <h2 class="inscription-title">S'inscrire</h2>
+        <form class="inscription-form" method="POST" action="inscription.php">
+            <div class="form-group">
+                <label for="nom">Nom :</label>
+                <input type="text" id="nom" name="nom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom :</label>
+                <input type="text" id="prenom" name="prenom" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">E-mail :</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Mot de passe :</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse :</label>
+                <input type="text" id="adresse" name="adresse" required>
+            </div>
+
+            <div class="form-group">
+                <label for="telephone">Numéro de téléphone :</label>
+                <input type="text" id="telephone" name="telephone" required>
+            </div>
+
+            <div class="form-group">
+                <label for="pays">Pays :</label>
+                <input type="text" id="pays" name="pays" required>
+            </div>
+
+            <button type="submit" class="inscription-button">S'inscrire</button>
+        </form>
+
+        <div class="inscription-footer">
+            <p>Déjà un compte ? <a href="connexion.html">Connecte-toi ici</a></p>
+        </div>
+    </div>
+</body>
+</html>

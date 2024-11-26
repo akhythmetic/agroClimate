@@ -1,26 +1,130 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-   <meta charset="UTF-8">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Illustrations des Exemples Concrets</title>
-   <link rel="stylesheet" href="style2.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Illustrations des Exemples Concrets</title>
+    <link rel="stylesheet" href="style2.css">
 </head>
-<body>
-   <header>
-       <input type="text" placeholder="Search...">
-       <h1>ILLUSTRATIONS DES EXEMPLES CONCRETS</h1>
-   </header>
+<body class="page-illustration">
+    <!-- Barre de recherche -->
+    <header class="page-illustration">
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search...">
+            <button id="searchButton">🔍</button>
+        </div>
+    </header>
 
-   <section class="main-content">
-       <p>Les effets du changement climatique sur l’agriculture...</p>
-       <!-- Contenu de la maquette page 4 -->
-   </section>
+    <!-- Titre principal -->
+    <h1 class="page-illustration-title">ILLUSTRATIONS DES EXEMPLES CONCRETS</h1>
+    <section class="main-title">
+        <p>
+            Les effets du changement climatique sur l’agriculture sont ressentis différemment selon les régions du monde. 
+            Cette section présente plusieurs études de cas d'agriculteurs et de communautés qui ont réussi à s’adapter 
+            aux nouvelles conditions climatiques à travers des innovations et des pratiques durables.
+        </p>
+    </section>
 
-   <a href="index2.html" class="back-link">Retour à l'accueil</a>
+    <!-- Étude de cas : Région du Sahel -->
+    <section class="case-study">
+        <h2>ÉTUDE DE LA RÉGION DU SAHEL, AFRIQUE</h2>
+        <div class="aligned-section">
+            <div class="text">
+                <h3>Problèmes rencontrés :</h3>
+                <ul>
+                    <li>Diminution des rendements agricoles en raison de la sécheresse persistante.</li>
+                    <li>Érosion des sols et perte de terres arables.</li>
+                    <li>Migrations forcées des populations rurales vers les villes.</li>
+                </ul>
+                <h3>Solution mise en place :</h3>
+                <p>
+                    Les agriculteurs locaux, avec l’aide d’organisations non gouvernementales (ONG), ont mis en œuvre 
+                    des techniques de conservation des eaux et des sols, comme le zai (une méthode traditionnelle de culture) 
+                    et l’agroforesterie (plantation d’arbres pour protéger les cultures et restaurer les sols).
+                </p>
+            </div>
+            <div class="image">
+                <img src="photos/illustrations1.webp" alt="Carte de la région du Sahel" class="content-image">
+            </div>
+        </div>
+    </section>
 
-   <footer>
-       <p>© 2024 - Tous droits réservés</p>
-   </footer>
+    <!-- Étude de cas : Vallée Centrale -->
+    <section class="case-study">
+        <h2>ÉTUDE DE LA VALLÉE CENTRALE DE CALIFORNIE, USA</h2>
+        <div class="aligned-section">
+            <div class="text">
+                <p>
+                    La vallée centrale de Californie est l’une des régions agricoles les plus productives au monde, 
+                    mais elle est de plus en plus affectée par la sécheresse prolongée et la diminution des nappes phréatiques.
+                </p>
+                <h3>Problèmes rencontrés :</h3>
+                <ul>
+                    <li>Réduction des ressources en eau disponibles pour l’irrigation.</li>
+                    <li>Augmentation des coûts liés à l’irrigation en raison du pompage accru des nappes phréatiques.</li>
+                    <li>Conflits d’usage entre agriculteurs et zones urbaines pour l’accès à l’eau.</li>
+                </ul>
+                <h3>Solution mise en place :</h3>
+                <p>
+                    Les agriculteurs ont adopté des systèmes d’irrigation de précision utilisant des capteurs pour mesurer 
+                    l’humidité des sols, ainsi que des pratiques de culture sans labour pour réduire l’évaporation de l’eau.
+                </p>
+            </div>
+            <div class="image">
+                <img src="photos/illustrations2.jpg!d" alt="Image de la vallée centrale de Californie" class="content-image">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 - Tous droits réservés</p>
+    </footer>
+
+    <script>
+        // Sélectionne les éléments de la recherche
+        const searchInput = document.getElementById('searchInput');
+        const searchButton = document.getElementById('searchButton');
+
+        // Fonction de gestion de la recherche
+        searchButton.addEventListener('click', function() {
+            const query = searchInput.value.trim().toLowerCase();
+
+            // Liste des mots-clés et pages correspondantes
+            const routes = {
+                "actualité": "actualites.html",
+                "actualités": "actualites.html",
+                "actualites": "actualites.html",
+                "actualite": "actualites.html",
+                "équipe": "ourteam.html",
+                "equipe": "ourteam.html",
+                "team": "ourteam.html",
+                "our team": "ourteam.html",
+                "analyse": "analyse.html",
+                "analyses": "analyse.html",
+                "connexion": "connexion.php",
+                "se connecter": "connexion.php",
+                "s'inscrire": "connexion.php",
+                "inscription": "connexion.php",
+                "accueil": "index2.html",
+                "interview": "interviews.html",
+                "interviews": "interviews.html"
+            };
+
+            // Vérifie si la requête correspond à une route
+            if (routes[query]) {
+                window.location.href = routes[query]; // Redirection
+            } else {
+                alert("Aucune page correspondante trouvée !");
+            }
+        });
+
+        // Permet d'utiliser la touche Entrée pour effectuer une recherche
+        searchInput.addEventListener('keypress', function(event) {
+            if (event.key === 'Enter') {
+                searchButton.click();
+            }
+        });
+    </script>
 </body>
 </html>

@@ -1,3 +1,35 @@
+<?php
+session_start(); // Démarrage de la session
+
+// Vérification si le formulaire a été soumis
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    include('bd.php'); // Inclure la connexion à la base de données
+    $bdd = getBD(); // Connexion à la base de données
+
+    // Récupération des données du formulaire
+    $email = $_POST['mail'];
+    $password = $_POST['mdp'];
+
+    // Vérifier si l'email existe dans la base de données
+    $requete = $bdd->prepare('SELECT * FROM client WHERE email = ?');
+    $requete->execute([$email]);
+    $client = $requete->fetch(); // Récupère l'utilisateur si trouvé
+
+    if ($client && password_verify($password, $client['password'])) {
+        // Si le mot de passe est valide
+        $_SESSION['client_id'] = $client['id']; // Stocke l'ID de l'utilisateur dans la session
+        $_SESSION['client_email'] = $client['email']; // Stocke l'email de l'utilisateur dans la session
+
+        // Rediriger l'utilisateur vers la page d'accueil après la connexion
+        header('Location: index2.php');
+        exit();
+    } else {
+        // Si l'email ou le mot de passe est incorrect
+        $error_message = "Adresse e-mail ou mot de passe incorrect.";
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -13,19 +45,19 @@
             <button id="searchButton">🔍</button>
         </div>
     </header>
-    
+
     <main class="login-container">
         <h1 class="login-title">DÉJÀ CLIENT ?</h1>
         <div class="login-form">
             <div class="login-avatar">
                 <img src="photos/tete_connexion.jpg" alt="Avatar" class="avatar-image">
             </div>
-            <form>
-                <label for="identifiant">Identifiant :</label>
-                <input type="text" id="identifiant" name="identifiant" placeholder="Entrez votre identifiant" required>
+            <form action="connexion.php" method="post">
+                <label for="mail">Adresse e-mail :</label>
+                <input type="email" id="mail" name="mail" placeholder="Entrez votre e-mail" required>
                 
                 <label for="password">Mot de passe :</label>
-                <input type="password" id="password" name="password" placeholder="Entrez votre mot de passe" required>
+                <input type="password" id="password" name="mdp" placeholder="Entrez votre mot de passe" required>
                 
                 <div class="options">
                     <label>
@@ -33,28 +65,29 @@
                     </label>
                     <a href="#" class="forgot-password">Mot de passe oublié</a>
                 </div>
-                <div class="connexion-footer">
-                    <p>Pas de compte ? <a href="inscription.php">Inscris-toi ici</a></p>
-                </div>
                 <button type="submit" class="login-button">Se connecter</button>
             </form>
+
+            <?php if (isset($error_message)): ?>
+                <p style="color: red;"><?= $error_message ?></p>
+            <?php endif; ?>
+
+            <div class="auth-buttons">
+                <p>Pas de compte ? <a href="inscription.php">Créer un nouveau compte</a></p>
+            </div>
         </div>
     </main>
-    <a href="index2.html" class="button">Retour à l'accueil</a>
     <footer>
         <p>© 2024 - Tous droits réservés</p>
     </footer>
-    
+
     <script>
-        // Sélectionne les éléments de la recherche
+        // Fonction de recherche
         const searchInput = document.getElementById('searchInput');
         const searchButton = document.getElementById('searchButton');
 
-        // Fonction de gestion de la recherche
         searchButton.addEventListener('click', function() {
             const query = searchInput.value.trim().toLowerCase();
-
-            // Liste des mots-clés et pages correspondantes
             const routes = {
                 "actualité": "actualites.html",
                 "actualités": "actualites.html",
@@ -70,20 +103,17 @@
                 "illustrations": "illustrations.html",
                 "visualisation": "illustrations.html",
                 "visualisations": "illustrations.html",
-                "accueil": "index2.html",
+                "accueil": "index2.php",
                 "interview": "interviews.html",
                 "interviews": "interviews.html"
             };
-
-            // Vérifie si la requête correspond à une route
             if (routes[query]) {
-                window.location.href = routes[query]; // Redirection
+                window.location.href = routes[query];
             } else {
                 alert("Aucune page correspondante trouvée !");
             }
         });
 
-        // Permet d'utiliser la touche Entrée pour effectuer une recherche
         searchInput.addEventListener('keypress', function(event) {
             if (event.key === 'Enter') {
                 searchButton.click();
