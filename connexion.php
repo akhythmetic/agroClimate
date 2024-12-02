@@ -10,23 +10,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['mail'];
     $password = $_POST['mdp'];
 
-    // Vérifier si l'email existe dans la base de données
     $requete = $bdd->prepare('SELECT * FROM client WHERE email = ?');
-    $requete->execute([$email]);
-    $client = $requete->fetch(); // Récupère l'utilisateur si trouvé
+$requete->execute([$email]);
+$client = $requete->fetch();
 
-    if ($client && password_verify($password, $client['password'])) {
-        // Si le mot de passe est valide
-        $_SESSION['client_id'] = $client['id']; // Stocke l'ID de l'utilisateur dans la session
-        $_SESSION['client_email'] = $client['email']; // Stocke l'email de l'utilisateur dans la session
+if ($client && password_verify($password, $client['password'])) {
+    $_SESSION['client_id'] = $client['id'];
+    $_SESSION['client_email'] = $client['email'];
+    $_SESSION['client_name'] = $client['first_name'] . ' ' . $client['last_name'];
+    header('Location: index2.php');
+    exit();
+} else {
+    $error_message = "Adresse e-mail ou mot de passe incorrect.";
+}
 
-        // Rediriger l'utilisateur vers la page d'accueil après la connexion
-        header('Location: index2.php');
-        exit();
-    } else {
-        // Si l'email ou le mot de passe est incorrect
-        $error_message = "Adresse e-mail ou mot de passe incorrect.";
-    }
 }
 ?>
 
@@ -63,7 +60,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <label>
                         <input type="checkbox" name="remember"> Se souvenir de moi
                     </label>
-                    <a href="#" class="forgot-password">Mot de passe oublié</a>
+                    <a href="reset_password.php" class="forgot-password">Mot de passe oublié</a>
                 </div>
                 <button type="submit" class="login-button">Se connecter</button>
             </form>
@@ -77,6 +74,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             </div>
         </div>
     </main>
+    <a href="index2.php" class="button">Retour à l'accueil</a>
     <footer>
         <p>© 2024 - Tous droits réservés</p>
     </footer>

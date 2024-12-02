@@ -1,3 +1,23 @@
+<?php if (isset($_GET['error'])): ?>
+    <p style="color: red;">
+        <?php
+        switch ($_GET['error']) {
+            case 'missing_fields':
+                echo "Veuillez remplir tous les champs.";
+                break;
+            case 'password_mismatch':
+                echo "Les mots de passe ne correspondent pas.";
+                break;
+            case 'invalid_email':
+                echo "Adresse e-mail invalide.";
+                break;
+            default:
+                echo "Une erreur inconnue s'est produite.";
+        }
+        ?>
+    </p>
+<?php endif; ?>
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -19,19 +39,22 @@
         <div class="login-form">
             <form action="enregistrement.php" method="post">
                 <label for="n">Nom :</label>
-                <input type="text" id="n" name="n" value="" placeholder="Entrez votre nom" required>
+                <input type="text" id="n" name="n" value="<?php echo htmlspecialchars($_GET['n'] ?? ''); ?>" placeholder="Entrez votre nom" required>
 
                 <label for="p">Prénom :</label>
-                <input type="text" id="p" name="p" value="" placeholder="Entrez votre prénom" required>
+                <input type="text" id="p" name="p" value="<?php echo htmlspecialchars($_GET['p'] ?? ''); ?>" placeholder="Entrez votre prénom" required>
 
                 <label for="adr">Adresse :</label>
-                <input type="text" id="adr" name="adr" value="" placeholder="Entrez votre adresse" required>
+                <input type="text" id="adr" name="adr" value="<?php echo htmlspecialchars($_GET['adr'] ?? ''); ?>" placeholder="Entrez votre adresse" required>
 
                 <label for="num">Numéro de téléphone :</label>
-                <input type="text" id="num" name="num" value="" placeholder="Entrez votre numéro de téléphone" required>
+                <input type="text" id="num" name="num" value="<?php echo htmlspecialchars($_GET['num'] ?? ''); ?>" placeholder="Entrez votre numéro de téléphone" required>
 
                 <label for="mail">Adresse e-mail :</label>
-                <input type="email" id="mail" name="mail" value="" placeholder="Entrez votre e-mail" required>
+                <input type="email" id="mail" name="mail" value="<?php echo htmlspecialchars($_GET['mail'] ?? ''); ?>" placeholder="Entrez votre e-mail" required>
+
+                <label for="country">Pays :</label>
+                <input type="text" id="country" name="pays" value="<?php echo htmlspecialchars($_GET['pays'] ?? ''); ?>" placeholder="Entrez votre pays" required>
 
                 <label for="mdp1">Mot de passe :</label>
                 <input type="password" id="mdp1" name="mdp1" placeholder="Choisissez un mot de passe" required>
@@ -48,7 +71,6 @@
     </footer>
 
     <script>
-        // Fonction de recherche
         const searchInput = document.getElementById('searchInput');
         const searchButton = document.getElementById('searchButton');
 
