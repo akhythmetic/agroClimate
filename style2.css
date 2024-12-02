@@ -1,336 +1,337 @@
+
 /* Style global de la page */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #E3DCD2;
-    color: #333;
-    margin: 0;
-    padding: 0;
- }
- 
- /* Header et barre de recherche */
- header {
-    background-color: #f3f0eb;
-    padding: 15px;
-    text-align: center;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    display: flex;
-    align-items: flex-start; /* Aligne les éléments en haut */
-    justify-content: flex-start; /* Aligne les éléments à gauche */
- }
- 
- header input[type="text"] {
-   border: none;
-   border-radius: 20px;
-   padding: 8px 16px;
-   width: 200px;
-   outline: none;
-   font-size: 1em;
-   margin-bottom: 10px;
-   background-color: rgba(204, 139, 101, 0.5);;
+  font-family: Arial, sans-serif;
+  background-color: #E3DCD2;
+  color: #333;
+  margin: 0;
+  padding: 0;
 }
- 
- /* Titre principal */
- h1 {
-    font-size: 2.5em; /* Ajuste la taille de la police selon tes préférences */
-    color: #4d4d4d;
-    background-color: rgba(255, 255, 255, 0.8); /* 0.8 pour 80% d'opacité */
-    padding: 20px 30px;
-    border-radius: 10px;
-    text-align: center;
-    display: inline-block;
-    margin-top: 15px;
-    margin-right : 15px;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif;
-    text-transform: uppercase; /* Majuscules comme dans la maquette */
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour effet de relief */
-    border: 3px solid #d4c8b3; /* Bordure autour du titre */
-    width: 900px;
-    margin-left : 20px;
- }
- .aligned-section {
-   display: flex;
-   align-items: center; /* Centre les éléments verticalement si les hauteurs diffèrent */
-   gap: 20px; /* Espace entre les éléments */
-   margin-top: 20px;
-}
- /* Texte d'introduction */
- .intro-text {
-    font-style: italic;
-    text-align: center;
-    margin-top: 20px;
-    color: #4a4a4a;
- }
 
- .intro-text-actu {
-   text-align: center;
-   margin-top: 20px;
-   color: #013328;
-   text-transform: uppercase;
-   margin-right:300px;
-   font-weight: bold;
+/* Header et barre de recherche */
+header {
+  background-color: #f3f0eb;
+  padding: 15px;
+  text-align: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: flex-start; /* Aligne les éléments en haut */
+  justify-content: flex-start; /* Aligne les éléments à gauche */
+}
+
+header input[type="text"] {
+ border: none;
+ border-radius: 20px;
+ padding: 8px 16px;
+ width: 200px;
+ outline: none;
+ font-size: 1em;
+ margin-bottom: 10px;
+ background-color: rgba(204, 139, 101, 0.5);;
+}
+
+/* Titre principal */
+h1 {
+  font-size: 2.5em; /* Ajuste la taille de la police selon tes préférences */
+  color: #4d4d4d;
+  background-color: rgba(255, 255, 255, 0.8); /* 0.8 pour 80% d'opacité */
+  padding: 20px 30px;
+  border-radius: 10px;
+  text-align: center;
+  display: inline-block;
+  margin-top: 15px;
+  margin-right : 15px;
+  font-weight: bold;
+  font-family: 'Arial', sans-serif;
+  text-transform: uppercase; /* Majuscules comme dans la maquette */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2); /* Ombre pour effet de relief */
+  border: 3px solid #d4c8b3; /* Bordure autour du titre */
+  width: 900px;
+  margin-left : 20px;
+}
+.aligned-section {
+ display: flex;
+ align-items: center; /* Centre les éléments verticalement si les hauteurs diffèrent */
+ gap: 20px; /* Espace entre les éléments */
+ margin-top: 20px;
+}
+/* Texte d'introduction */
+.intro-text {
+  font-style: italic;
+  text-align: center;
+  margin-top: 20px;
+  color: #4a4a4a;
+}
+
+.intro-text-actu {
+ text-align: center;
+ margin-top: 20px;
+ color: #013328;
+ text-transform: uppercase;
+ margin-right:300px;
+ font-weight: bold;
 
 }
- 
- /* Section principale */
- .main-content {
-    padding: 20px;
-    max-width: 1000px;
-    margin: auto;
-    background-color: #E3DCD2;
- }
- 
- /* Boutons */
- .buttons-section {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    margin-top: 20px;
- }
- 
- .button {
-    background-color: #5e8b7e;
-    border: none;
-    color: white;
-    padding: 10px 20px;
-    text-align: center;
-    border-radius: 8px;
-    font-size: 1em;
-    cursor: pointer;
-    width: 200px;
-    display: block;
- }
- 
- .button:hover {
-    background-color: #4d766a;
- }
- 
- /* Paragraphe principal */
- .main-paragraph, .final-paragraph {
-    font-size: 1.1em;
-    margin-top: 20px;
-    line-height: 1.6;
-    color: #4a4a4a;
- }
- .main-paragraph, .final-paragraph {
-   font-size: 1.1em;
-   margin-top: 20px;
-   line-height: 1.6;
-   color: #4a4a4a;
-   font-family: 'inter';
+
+/* Section principale */
+.main-content {
+  padding: 20px;
+  max-width: 1000px;
+  margin: auto;
+  background-color: #E3DCD2;
 }
- /* Texte en surbrillance (blockquote) */
- .highlight-text {
-    font-style: italic;
-    color: #555555;
-    background-color: #f0f0f0;
-    padding: 10px;
-    border-left: 5px solid #d4c8b3;
-    margin: 20px 0;
-    font-size: 1.1em;
- }
- 
- /* Images de contenu */
- .content-image {
-    width: 400px;
-    max-width: 700px;
-    border-radius: 8px;
-    margin: 20px 0;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
- }
- .additional-image {
-   width: 200px;
-   max-width: 700px;
-   border-radius: 8px;
-   margin: 20px 0;
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
+
+/* Boutons */
+.buttons-section {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.button {
+  background-color: #5e8b7e;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 8px;
+  font-size: 1em;
+  cursor: pointer;
+  width: 200px;
+  display: block;
+}
+
+.button:hover {
+  background-color: #4d766a;
+}
+
+/* Paragraphe principal */
+.main-paragraph, .final-paragraph {
+  font-size: 1.1em;
+  margin-top: 20px;
+  line-height: 1.6;
+  color: #4a4a4a;
+}
+.main-paragraph, .final-paragraph {
+ font-size: 1.1em;
+ margin-top: 20px;
+ line-height: 1.6;
+ color: #4a4a4a;
+ font-family: 'inter';
+}
+/* Texte en surbrillance (blockquote) */
+.highlight-text {
+  font-style: italic;
+  color: #555555;
+  background-color: #f0f0f0;
+  padding: 10px;
+  border-left: 5px solid #d4c8b3;
+  margin: 20px 0;
+  font-size: 1.1em;
+}
+
+/* Images de contenu */
+.content-image {
+  width: 400px;
+  max-width: 700px;
+  border-radius: 8px;
+  margin: 20px 0;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.additional-image {
+ width: 200px;
+ max-width: 700px;
+ border-radius: 8px;
+ margin: 20px 0;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
 }
 .actualites-image {
-   width: 300px;
-   max-width: 700px;
-   border-radius: 8px;
-   margin: 20px 0;
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
+ width: 300px;
+ max-width: 700px;
+ border-radius: 8px;
+ margin: 20px 0;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
 }
 
 .actualites2-image {
-   width: 600px;
-   max-width: 700px;
-   border-radius: 8px;
-   margin: 20px 0;
-   display: block;
-   margin-left: auto;
-   margin-right: auto;
+ width: 600px;
+ max-width: 700px;
+ border-radius: 8px;
+ margin: 20px 0;
+ display: block;
+ margin-left: auto;
+ margin-right: auto;
 }
- 
- /* Texte de conclusion */
- .conclusion-text {
-    font-weight: bold;
-    text-align: center;
-    margin-top: 20px;
-    color: #7F2F2F;
-    font-size: 1.2em;
- }
- 
- /* Sidebar général */
+
+/* Texte de conclusion */
+.conclusion-text {
+  font-weight: bold;
+  text-align: center;
+  margin-top: 20px;
+  color: #7F2F2F;
+  font-size: 1.2em;
+}
+
+/* Sidebar général */
 .sidebar {
-   position: fixed;
-   background-color: rgba(204, 139, 101, 0.5);
-   padding: 10px 15px;
-   border-radius: 8px;
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ position: fixed;
+ background-color: rgba(204, 139, 101, 0.5);
+ padding: 10px 15px;
+ border-radius: 8px;
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 /* Sidebar du haut (FAQ, Our Team) */
 .top-sidebar {
-   top: 10px; /* Position en haut */
-   right: 10px;
+ top: 10px; /* Position en haut */
+ right: 10px;
 }
 
 /* Sidebar du bas (Connexion, Inscription) */
 .bottom-sidebar {
-   bottom: 10px; /* Position en bas */
-   right: 10px; /* Toujours aligné à droite */
+ bottom: 10px; /* Position en bas */
+ right: 10px; /* Toujours aligné à droite */
 }
 
 /* Style des liens */
 .sidebar a {
-   text-decoration: none;
-   color: #5a4e3b;
-   margin: 5px 0;
-   font-size: 1em;
-   display: block;
+ text-decoration: none;
+ color: #5a4e3b;
+ margin: 5px 0;
+ font-size: 1em;
+ display: block;
 }
 
 .sidebar a:hover {
-   color: #4a3e2b;
+ color: #4a3e2b;
 }
 
 /* Footer */
 footer {
-   text-align: center;
-   padding: 10px;
-   font-size: 0.9em;
-   color: #8c8c8c;
-   background-color: #d4c8b3;
-   margin-top: 20px;
+ text-align: center;
+ padding: 10px;
+ font-size: 0.9em;
+ color: #8c8c8c;
+ background-color: #d4c8b3;
+ margin-top: 20px;
 }
- /* Footer */
- footer {
-    text-align: center;
-    padding: 10px;
-    font-size: 0.9em;
-    color: #8c8c8c;
-    background-color: #d4c8b3;
-    margin-top: 20px;
- }
- 
+/* Footer */
+footer {
+  text-align: center;
+  padding: 10px;
+  font-size: 0.9em;
+  color: #8c8c8c;
+  background-color: #d4c8b3;
+  margin-top: 20px;
+}
+
 /* Section "Our Team" */
 .team-section {
-   background-color: #f3f0eb;
-   padding: 40px 20px;
-   text-align: center;
+ background-color: #f3f0eb;
+ padding: 40px 20px;
+ text-align: center;
 }
 
 .team-section h2 {
-   font-size: 2.5em;
-   color: #013328;
-   text-transform: uppercase;
-   margin-bottom: 40px;
+ font-size: 2.5em;
+ color: #013328;
+ text-transform: uppercase;
+ margin-bottom: 40px;
 }
 
 .team-member {
-   background-color: #E3DCD2;
-   border-radius: 10px;
-   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-   width: 1000px;
-   padding: 20px;
-   text-align: center;
+ background-color: #E3DCD2;
+ border-radius: 10px;
+ box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+ width: 1000px;
+ padding: 20px;
+ text-align: center;
 }
 
 .team-member img {
-   width: 80px;
-   height: 80px;
-   border-radius: 50%; /* Rend l'image circulaire */
-   object-fit: cover;
-   margin-bottom: 15px;
+ width: 80px;
+ height: 80px;
+ border-radius: 50%; /* Rend l'image circulaire */
+ object-fit: cover;
+ margin-bottom: 15px;
 }
 
 .team-member h3 {
-   font-size: 1.5em;
-   color: #333;
-   margin: 10px 0;
+ font-size: 1.5em;
+ color: #333;
+ margin: 10px 0;
 }
 
 .team-member p {
-   color: #4a4a4a;
-   font-size: 0.9em;
-   line-height: 1.6;
+ color: #4a4a4a;
+ font-size: 0.9em;
+ line-height: 1.6;
 }
 
 .role {
-   font-style: italic;
-   color: #7f8c8d;
-   text-decoration: underline;
+ font-style: italic;
+ color: #7f8c8d;
+ text-decoration: underline;
 }
 
 .bio {
-   margin-top: 5px;
+ margin-top: 5px;
 }
 
 .intro-team {
-   text-align: center;
-   margin: 20px 0;
+ text-align: center;
+ margin: 20px 0;
 }
 
 .intro-text {
-   font-size: 18px;
-   line-height: 1.6;
-   color: #333;
-   font-style: italic;
-   padding: 0 10px;
-   font-weight: bold ;
+ font-size: 18px;
+ line-height: 1.6;
+ color: #333;
+ font-style: italic;
+ padding: 0 10px;
+ font-weight: bold ;
 }
 
 
 /* Section Assistance */
 .assistance {
-   background-color: #d4c8b3;
-   width: 1000px;
-   padding: 20px;
-   margin: 20px 0;
-   border-radius: 10px;
-   text-align: center;
-   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+ background-color: #d4c8b3;
+ width: 1000px;
+ padding: 20px;
+ margin: 20px 0;
+ border-radius: 10px;
+ text-align: center;
+ box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .assistance h2 {
-   font-size: 1.8em;
-   color: #2c3e50;
-   margin-bottom: 10px;
+ font-size: 1.8em;
+ color: #2c3e50;
+ margin-bottom: 10px;
 }
 
 .assistance p {
-   font-size: 1em;
-   margin: 10px 0;
-   line-height: 1.6;
+ font-size: 1em;
+ margin: 10px 0;
+ line-height: 1.6;
 }
 
 .assistance a {
-   color: #3498db;
-   text-decoration: none;
-   font-weight: bold;
+ color: #3498db;
+ text-decoration: none;
+ font-weight: bold;
 }
 
 .assistance a:hover {
-   text-decoration: underline;
+ text-decoration: underline;
 }
 
 
@@ -340,9 +341,9 @@ footer {
 
 .left-align {
 
-   text-align: left;
+ text-align: left;
 
-   margin-left: 0;
+ margin-left: 0;
 
 }
 
@@ -351,9 +352,9 @@ footer {
 
 .right-align {
 
-   text-align: right;
+ text-align: right;
 
-   margin-right: 0;
+ margin-right: 0;
 
 }
 
@@ -363,19 +364,19 @@ footer {
 
 .final-paragraph {
 
-   font-weight: bold;
+ font-weight: bold;
 
-   color: white; /* Texte en blanc */
+ color: white; /* Texte en blanc */
 
-   background-color: #4d766a; /* Fond coloré avec 50% d'opacité */
+ background-color: #4d766a; /* Fond coloré avec 50% d'opacité */
 
-   padding: 15px; /* Un peu d'espace autour du texte */
+ padding: 15px; /* Un peu d'espace autour du texte */
 
-   border-radius: 10px; /* Coins arrondis */
+ border-radius: 10px; /* Coins arrondis */
 
-   margin-top: 20px;
+ margin-top: 20px;
 
-   line-height: 1.6;
+ line-height: 1.6;
 
 }
 
@@ -383,7 +384,7 @@ footer {
 
 .interview-section {
 
-   margin-bottom: 40px;
+ margin-bottom: 40px;
 
 }
 
@@ -391,13 +392,13 @@ footer {
 
 .interview-section h2 {
 
-   font-size: 1.8em;
+ font-size: 1.8em;
 
-   color: #013328;
+ color: #013328;
 
-   font-weight: bold;
+ font-weight: bold;
 
-   margin-bottom: 10px;
+ margin-bottom: 10px;
 
 }
 
@@ -405,13 +406,13 @@ footer {
 
 .interview-section p {
 
-   font-size: 1.2em;
+ font-size: 1.2em;
 
-   color: #4a4a4a;
+ color: #4a4a4a;
 
-   line-height: 1.6;
+ line-height: 1.6;
 
-   margin-bottom: 20px;
+ margin-bottom: 20px;
 
 }
 
@@ -419,11 +420,11 @@ footer {
 
 .image-paragraph {
 
-   display: flex;
+ display: flex;
 
-   align-items: center;
+ align-items: center;
 
-   gap: 20px;
+ gap: 20px;
 
 }
 
@@ -431,9 +432,9 @@ footer {
 
 .image-paragraph .content-image {
 
-   width: 300px;  /* Ajustez la taille de l'image */
+ width: 300px;  /* Ajustez la taille de l'image */
 
-   margin-right: 20px;
+ margin-right: 20px;
 
 }
 
@@ -441,19 +442,19 @@ footer {
 
 .highlight-text {
 
-   font-size: 1.2em;
+ font-size: 1.2em;
 
-   font-weight: bold;
+ font-weight: bold;
 
-   color: #013328;
+ color: #013328;
 
-   opacity: 0.82;
+ opacity: 0.82;
 
-   margin-left: 10px;
+ margin-left: 10px;
 
-   font-style: italic;
+ font-style: italic;
 
-   flex: 1;
+ flex: 1;
 
 }
 
@@ -462,298 +463,423 @@ footer {
 
 .faq-section {
 
-   padding: 20px;
+ padding: 20px;
 
-   max-width: 1000px;
+ max-width: 1000px;
 
-   margin: auto;
+ margin: auto;
 
 }
 
 
 .faq-item {
 
-   margin-bottom: 20px;
+ margin-bottom: 20px;
 
-   padding: 10px;
+ padding: 10px;
 
-   background-color: #fff;
+ background-color: #fff;
 
-   border-radius: 8px;
+ border-radius: 8px;
 
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 
 }
 
 
 .faq-item h2 {
 
-   font-size: 1.5em;
+ font-size: 1.5em;
 
-   color: #013328;
+ color: #013328;
 
-   margin: 0;
+ margin: 0;
 
-   padding: 10px;
+ padding: 10px;
 
-   font-weight: bold;
+ font-weight: bold;
 
 }
 
 
 .faq-item h2:hover {
 
-   color: #5e8b7e;
+ color: #942f2f;
 
-   cursor: pointer;
+ cursor: pointer;
 
 }
 /* Styles pour la page de connexion */
 body {
-    background-color: #f3f0eb;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  background-color: #f3f0eb;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 header .search-bar {
-    width: 100%;
-    padding: 10px;
-    background-color: #E3DCD2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  width: 100%;
+  padding: 10px;
+  background-color: #E3DCD2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 header .search-bar input {
-    border: 1px solid #c8b7a6;
-    border-radius: 20px;
-    padding: 5px 15px;
-    width: 200px;
+  border: 1px solid #c8b7a6;
+  border-radius: 20px;
+  padding: 5px 15px;
+  width: 200px;
 }
 
 header .search-bar button {
-    margin-left: 10px;
-    background-color: #f2e6da;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 50%;
-    cursor: pointer;
+  margin-left: 10px;
+  background-color: #f2e6da;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 
 .login-container {
-    text-align: center;
-    margin-top: 50px;
+  text-align: center;
+  margin-top: 50px;
 }
 
 .login-title {
-    font-size: 24px;
-    font-weight: bold;
-    color: #5f5246;
-    text-transform: uppercase;
+  font-size: 24px;
+  font-weight: bold;
+  color: #5f5246;
+  text-transform: uppercase;
 }
 
 .login-form {
-    background-color: #fff;
-    padding: 20px;
-    margin: 20px auto;
-    width: 300px;
-    border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  padding: 20px;
+  margin: 20px auto;
+  width: 300px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .login-avatar {
-    text-align: center;
-    margin-bottom: 20px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .login-avatar .avatar-image {
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    background-color: #E3DCD2;
-    display: inline-block;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #E3DCD2;
+  display: inline-block;
 }
 
 form label {
-    display: block;
-    font-size: 14px;
-    color: #5f5246;
-    margin-bottom: 5px;
-    text-align: left;
+  display: block;
+  font-size: 14px;
+  color: #5f5246;
+  margin-bottom: 5px;
+  text-align: left;
 }
 
 form input[type="text"],
 form input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #c8b7a6;
-    border-radius: 10px;
-    font-size: 14px;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #c8b7a6;
+  border-radius: 10px;
+  font-size: 14px;
 }
 
 .options {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .options label {
-    font-size: 12px;
+  font-size: 12px;
 }
 
 .options .forgot-password {
-    font-size: 12px;
-    color: #c48c6e;
-    text-decoration: none;
+  font-size: 12px;
+  color: #c48c6e;
+  text-decoration: none;
 }
 
 .options .forgot-password:hover {
-    text-decoration: underline;
+  text-decoration: underline;
 }
 
 .login-button {
-    background-color: #c48c6e;
-    color: white;
-    border: none;
-    padding: 10px 15px;
-    border-radius: 10px;
-    cursor: pointer;
-    width: 100%;
-    font-size: 16px;
+  background-color: #c48c6e;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
 }
 
 .login-button:hover {
-    background-color: #a56e54;
+  background-color: #a56e54;
 }
 .auth-buttons {
-   display: flex;
-   justify-content: center;
-   gap: 10px;
-   margin-top: 10px;
+ display: flex;
+ justify-content: center;
+ gap: 10px;
+ margin-top: 10px;
 }
 
 /* Style spécifique à la page illustration */
 body.page-illustration {
-   background-color: #f5f5f5; /* Ajuste la couleur de fond */
-   font-family: 'Arial', sans-serif;
-   margin: 0;
-   padding: 0;
+ background-color: #f5f5f5; /* Ajuste la couleur de fond */
+ font-family: 'Arial', sans-serif;
+ margin: 0;
+ padding: 0;
 }
 
 header.page-illustration {
-   background-color: rgba(243, 240, 235, 1);
-   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ background-color: rgba(243, 240, 235, 1);
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 header.page-illustration input[type="text"] {
-   background-color: rgba(204, 139, 101, 0.2);
-   border-radius: 25px;
-   width: 220px;
-   font-size: 1em;
-   padding: 8px 14px;
+ background-color: rgba(204, 139, 101, 0.2);
+ border-radius: 25px;
+ width: 220px;
+ font-size: 1em;
+ padding: 8px 14px;
 }
 
 /* Titre principal pour la page illustration */
 h1.page-illustration-title {
-   font-size: 2.8em;
-   color: #4d4d4d;
-   background-color: rgba(255, 255, 255, 0.9);
-   border: 3px solid #d4c8b3;
-   border-radius: 12px;
-   padding: 20px 30px;
-   text-align: center;
-   margin: 20px auto;
-   width: 95%;
-   text-transform: uppercase;
-   font-weight: bold;
-   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+ font-size: 2.8em;
+ color: #4d4d4d;
+ background-color: rgba(255, 255, 255, 0.9);
+ border: 3px solid #d4c8b3;
+ border-radius: 12px;
+ padding: 20px 30px;
+ text-align: center;
+ margin: 20px auto;
+ width: 95%;
+ text-transform: uppercase;
+ font-weight: bold;
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
 }
 
 /* Conteneur principal */
 .main-content.page-illustration {
-   max-width: 1200px;
-   margin: 20px auto;
-   padding: 20px;
-   background-color: #ffffff;
-   border-radius: 10px;
-   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+ max-width: 1200px;
+ margin: 20px auto;
+ padding: 20px;
+ background-color: #ffffff;
+ border-radius: 10px;
+ box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Section avec des études de cas */
 .case-study {
-   margin-bottom: 40px;
-   padding: 20px;
-   background-color: rgba(243, 240, 235, 1);
-   border-left: 6px solid #d4c8b3;
-   border-radius: 8px;
-   box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
+ margin-bottom: 40px;
+ padding: 20px;
+ background-color: rgba(243, 240, 235, 1);
+ border-left: 6px solid #d4c8b3;
+ border-radius: 8px;
+ box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .case-study h2 {
-   font-size: 1.8em;
-   color: #013328;
-   margin-bottom: 10px;
+ font-size: 1.8em;
+ color: #013328;
+ margin-bottom: 10px;
 }
 
 .case-study p {
-   font-size: 1.2em;
-   color: #333333;
-   line-height: 1.8;
-   margin-bottom: 20px;
+ font-size: 1.2em;
+ color: #333333;
+ line-height: 1.8;
+ margin-bottom: 20px;
 }
 
 /* Conteneur aligné avec une carte */
 .case-study .aligned-section {
-   display: flex;
-   align-items: flex-start;
-   gap: 20px;
+ display: flex;
+ align-items: flex-start;
+ gap: 20px;
 }
 
 .case-study .aligned-section img {
-   max-width: 50%;
-   border-radius: 10px;
-   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+ max-width: 50%;
+ border-radius: 10px;
+ box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 /* Images de contenu */
 .content-image {
-   width: 100%;
-   border-radius: 8px;
-   margin-top: 20px;
+ width: 100%;
+ border-radius: 8px;
+ margin-top: 20px;
 }
 
 /* Paragraphe en surbrillance */
 .case-study .highlight-text {
-   font-size: 1.1em;
-   font-style: italic;
-   color: #555555;
-   background-color: #f9f9f9;
-   padding: 10px;
-   border-left: 5px solid #d4c8b3;
-   margin: 20px 0;
+ font-size: 1.1em;
+ font-style: italic;
+ color: #555555;
+ background-color: #f9f9f9;
+ padding: 10px;
+ border-left: 5px solid #d4c8b3;
+ margin: 20px 0;
 }
 
 /* Boutons spécifiques */
 .button-illustration {
-   background-color: #5e8b7e;
-   border: none;
-   color: white;
-   padding: 12px 24px;
-   border-radius: 8px;
-   text-transform: uppercase;
-   font-weight: bold;
-   cursor: pointer;
-   transition: background-color 0.3s ease;
-   margin: 10px 0;
-   display: inline-block;
+ background-color: #5e8b7e;
+ border: none;
+ color: white;
+ padding: 12px 24px;
+ border-radius: 8px;
+ text-transform: uppercase;
+ font-weight: bold;
+ cursor: pointer;
+ transition: background-color 0.3s ease;
+ margin: 10px 0;
+ display: inline-block;
 }
 
 .button-illustration:hover {
-   background-color: #4d766a;
+ background-color: #4d766a;
+}
+
+/* Styles pour la page de connexion uniquement */
+.connexion-page {
+ font-family: Arial, sans-serif;
+ background-color: #f3f0eb;  /* Fond léger pour la page de connexion */
+ display: flex;
+ flex-direction: column;
+ align-items: center;
+ padding: 20px;
+}
+
+/* Centrer le titre dans l'entête */
+.connexion-header {
+ background-color: #f3f0eb;
+ padding: 15px;
+ text-align: center; /* Centrer le texte */
+ box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+ width: 100%;
+}
+
+/* Titre "Poser une question" */
+.connexion-header h1 {
+ font-size: 2em;
+ margin: 0;
+ display: inline-block;  /* Permet de limiter la taille au texte */
+ width: auto;            /* Largeur automatique pour ajuster au texte */
+ padding: 5px 10px;      /* Espace autour du texte */
+ background-color: #fff; /* Fond blanc pour un carré */
+ border-radius: 10px;    /* Coins arrondis */
+ border: 1px solid #ca6a10; /* Bordure */
+ text-align: center; /* Assure le centrage du texte à l'intérieur du carré */
+ margin-left: auto;  /* Centrer horizontalement */
+ margin-right: auto; /* Centrer horizontalement */
+}
+
+
+
+
+/* Formulaire de connexion */
+.connexion-form {
+ display: flex;
+ flex-direction: column;
+ width: 100%;
+ max-width: 400px;
+ margin-top: 20px;
+ background-color: #fff;
+ padding: 20px;
+ border-radius: 10px;
+ box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels et champs de formulaire */
+.connexion-label {
+ font-size: 1.1em;
+ margin-bottom: 5px;
+ color: #333;
+}
+
+.connexion-input {
+ width: 100%;
+ padding: 12px;
+ margin-bottom: 20px;
+ font-size: 1.1em;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ box-sizing: border-box;
+}
+
+.connexion-input:focus {
+ border-color: #6c63ff;
+ outline: none;
+}
+
+.connexion-textarea {
+ width: 100%;
+ padding: 12px;
+ margin-bottom: 20px;
+ font-size: 1.1em;
+ border: 1px solid #ccc;
+ border-radius: 5px;
+ box-sizing: border-box;
+}
+
+/* Bouton de connexion */
+.connexion-button {
+ background-color: #ad542e;
+ color: #fff;
+ font-size: 1.1em;
+ padding: 12px;
+ border: none;
+ border-radius: 5px;
+ cursor: pointer;
+ transition: background-color 0.3s;
+}
+
+.connexion-button:hover {
+ background-color: #954716;
+}
+
+/* Footer de la page de connexion */
+.connexion-footer {
+ text-align: center;
+ margin-top: 20px;
+}
+/* Bouton "Retour à l'accueil" */
+.retour-bouton {
+ display: inline-block;        /* Pour ajuster la taille au contenu */
+ padding: 10px 10px;           /* Espacement autour du texte */
+ text-align: center;           /* Centrer le texte */
+ background-color: #ad542e;    /* Fond de couleur douce */
+ border: 1px solid #ccc;       /* Bordure simple */
+ border-radius: 5px;           /* Coins arrondis */
+ color: #f8f2f2;                  /* Couleur du texte */
+ text-decoration: none;        /* Retirer le soulignement du lien */
+ font-size: 1.2em;             /* Taille du texte */
+ margin: 20px auto;            /* Centrer le bouton avec un marge autour */
+ width: auto;     
+ margin-left: 810px;              /* Largeur automatique */
+}
+
+.retour-bouton:hover {
+ background-color: #954716;    /* Couleur de fond au survol */
+ border-color: #aaa;           /* Bordure plus foncée au survol */
+ cursor: pointer;              /* Curseur pointer pour le survol */
 }

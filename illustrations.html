@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -5,28 +6,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Illustrations des Exemples Concrets</title>
     <link rel="stylesheet" href="style2.css">
+    <link rel="icon" href="photos/logosite.png" type="image/png">
 </head>
-<body class="page-illustration">
+<body>
     <!-- Barre de recherche -->
-    <header class="page-illustration">
-        <div class="search-bar">
-            <input type="text" id="searchInput" placeholder="Search...">
-            <button id="searchButton">🔍</button>
-        </div>
-    </header>
+    <header>
+         <form id="search-form">
+            <input type="text" id="searchInput" placeholder="Search..." aria-label="Barre de recherche">
+         </form>
+    
+           <h1>ILLUSTRATIONS DES EXEMPLES CONCRETS</h1>
+    
+       </header>
 
-    <!-- Titre principal -->
-    <h1 class="page-illustration-title">ILLUSTRATIONS DES EXEMPLES CONCRETS</h1>
-    <section class="main-title">
-        <p>
+       <section class="main-content">
+
+    
+        <p class="final-paragraph">
             Les effets du changement climatique sur l’agriculture sont ressentis différemment selon les régions du monde. 
             Cette section présente plusieurs études de cas d'agriculteurs et de communautés qui ont réussi à s’adapter 
             aux nouvelles conditions climatiques à travers des innovations et des pratiques durables.
         </p>
-    </section>
 
     <!-- Étude de cas : Région du Sahel -->
-    <section class="case-study">
+    
         <h2>ÉTUDE DE LA RÉGION DU SAHEL, AFRIQUE</h2>
         <div class="aligned-section">
             <div class="text">
@@ -43,14 +46,15 @@
                     et l’agroforesterie (plantation d’arbres pour protéger les cultures et restaurer les sols).
                 </p>
             </div>
-            <div class="image">
-                <img src="photos/illustrations1.webp" alt="Carte de la région du Sahel" class="content-image">
+            <div>
+                <p>Le Sahel, une région semi-aride, est gravement touché par la désertification due à l’augmentation des températures et à la baisse des précipitations.</p>
+                <img src="photos/illustrations1.webp" alt="Carte de la région du Sahel" class="actualites1-image">
             </div>
         </div>
-    </section>
+    
 
     <!-- Étude de cas : Vallée Centrale -->
-    <section class="case-study">
+    
         <h2>ÉTUDE DE LA VALLÉE CENTRALE DE CALIFORNIE, USA</h2>
         <div class="aligned-section">
             <div class="text">
@@ -70,16 +74,21 @@
                     l’humidité des sols, ainsi que des pratiques de culture sans labour pour réduire l’évaporation de l’eau.
                 </p>
             </div>
-            <div class="image">
-                <img src="photos/illustrations2.jpg!d" alt="Image de la vallée centrale de Californie" class="content-image">
-            </div>
+            <img src="photos/illustrations2.jpg!d" alt="Image de la vallée centrale de Californie" class="content-image">
         </div>
-    </section>
+    
 
-    <!-- Footer -->
+    <a href="index2.php" class="button">Retour à l'accueil</a>
+
     <footer>
         <p>© 2024 - Tous droits réservés</p>
     </footer>
+
+    </section>
+
+
+    <!-- Footer -->
+    
 
     <script>
         // Sélectionne les éléments de la recherche
@@ -106,7 +115,7 @@
                 "se connecter": "connexion.php",
                 "s'inscrire": "connexion.php",
                 "inscription": "connexion.php",
-                "accueil": "index2.html",
+                "accueil": "index2.php",
                 "interview": "interviews.html",
                 "interviews": "interviews.html"
             };
