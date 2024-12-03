@@ -883,3 +883,36 @@ h1.page-illustration-title {
  border-color: #aaa;           /* Bordure plus foncée au survol */
  cursor: pointer;              /* Curseur pointer pour le survol */
 }
+/* Ajuste la taille du graphique pour l'ID graphImpactClimat */
+#graphImpactClimat {
+  width: 100%;         /* Prend toute la largeur disponible de son parent */
+  max-width: 500px;    /* Limite la largeur à 500px */
+  height: 200px;       /* Hauteur du graphique */
+  margin: 0 auto;      /* Centre le graphique horizontalement */
+  display: block;      /* Assure que le graphique est un bloc (élément de type bloc) */
+}
+
+
+/* Ajuste la taille du graphique pour l'ID graphAdaptation */
+#graphAdaptation {
+  width: 80%;           /* Réduit la largeur à 80% de l'élément parent */
+  max-width: 500px;     /* Limite la largeur à 500px */
+  height: 250px;        /* Hauteur réduite à 250px */
+  margin: 0 auto;       /* Centre le graphique horizontalement */
+  display: block;       /* Assure que le graphique est un élément de type bloc */
+}
+#graphTempCultures {
+  width: 80%;         /* Réduit la largeur à 80% du parent */
+  max-width: 300px;   /* Limite maximale de largeur à 300px */
+  height: 200px;      /* Réduit la hauteur à 200px */
+  margin: 0 auto;     /* Centre le graphique horizontalement */
+  display: block;     /* Assure que le graphique s'affiche comme un bloc */
+}
+/* Réduction de la taille du graphique des émissions de CO2 */
+#graphCO2 {
+  width: 80%;          /* Réduit la largeur à 80% de son conteneur parent */
+  max-width: 400px;    /* Limite la largeur maximale à 400px */
+  height: 200px;       /* Hauteur réduite à 200px */
+  margin: 0 auto;      /* Centre le graphique horizontalement */
+  display: block;      /* Assure que le graphique reste un élément de type bloc */
+}
