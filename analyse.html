@@ -1,4 +1,3 @@
-
 <!DOCTYPE html> 
 
 <html lang="fr">
@@ -13,6 +12,8 @@
 
    <link rel="stylesheet" href="style2.css">
    <link rel="icon" href="photos/logosite.png" type="image/png">
+   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 
 </head>
 
@@ -34,17 +35,66 @@
     <!-- Titre et premier paragraphe à gauche avec image à droite -->
 
     <p class="intro-text-actu">IMPACT DU CLIMAT SUR L’AGRICULTURE</p>
+<div class="aligned-section left-align">
+    <p>Cette section met en lumière l'influence directe des conditions climatiques, notamment la température et les précipitations, sur la production agricole dans diverses régions. Les variations climatiques jouent un rôle essentiel dans le rendement des cultures, et ces facteurs peuvent avoir des effets positifs ou négatifs en fonction des types de cultures et des spécificités géographiques.
 
-    <div class="aligned-section left-align">
+Les cultures qui nécessitent des conditions plus humides, comme le riz, profitent particulièrement des régions où les précipitations sont élevées. En effet, dans ces zones, l'irrigation naturelle fournie par les pluies abondantes permet un développement optimal des plantes, entraînant des rendements plus élevés. À l'inverse, dans les régions où les précipitations sont inférieures à la moyenne, les rendements peuvent être réduits en raison d'un manque d'eau, ce qui peut entraîner une diminution de la production agricole.</p>
 
-        
+    <!-- Graphique remplaçant l'image -->
+    <canvas id="graphImpactClimat" class="content-graph"></canvas>
+</div>
 
-        <p>Cette section met en lumière comment la température et les précipitations influencent la production agricole dans différentes régions. Les cultures adaptées à des climats plus humides, comme le riz, montrent un rendement plus élevé dans les régions
- avec des précipitations supérieures à la moyenne.</p>
+<script>
+    // Données pour le graphique
+    const labels = ['Région A', 'Région B', 'Région C', 'Région D'];
+    const data = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'Précipitations (mm)',
+                data: [120, 150, 90, 180],
+                backgroundColor: 'rgba(75, 192, 192, 0.5)', // Vert translucide
+                borderColor: 'rgba(75, 192, 192, 1)', // Vert
+                borderWidth: 1
+            },
+            {
+                label: 'Température moyenne (°C)',
+                data: [22, 25, 20, 18],
+                backgroundColor: 'rgba(54, 162, 235, 0.5)', // Bleu translucide
+                borderColor: 'rgba(54, 162, 235, 1)', // Bleu
+                borderWidth: 1
+            }
+        ]
+    };
 
-        <img src="photos/analyse 1.png" alt="Impact du climat" class="content-image">
+    // Configuration du graphique
+    const config = {
+        type: 'bar',
+        data: data,
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top'
+                }
+            },
+            scales: {
+                x: {
+                    beginAtZero: true
+                },
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    };
 
-    </div>
+    // Création du graphique
+    const ctx = document.getElementById('graphImpactClimat').getContext('2d');
+    new Chart(ctx, config);
+</script>
+
+    
 
 
     <!-- Titre et deuxième paragraphe à droite avec image à gauche -->
@@ -53,7 +103,7 @@
 
     <div class="aligned-section right-align">
 
-        <img src="photos/analyse 2.png" alt="Rendement agricole" class="content-image">
+        <canvas id="graphAdaptation" class="content-graph"></canvas>
 
         
 
@@ -61,6 +111,57 @@
  des solutions majeures.</p>
 
     </div>
+    <script>
+        // Données pour le graphique
+        const labelsAdaptation = ['Année 1', 'Année 2', 'Année 3', 'Année 4', 'Année 5'];
+        const dataAdaptation = {
+            labels: labelsAdaptation,
+            datasets: [
+                {
+                    label: 'Stratégie d\'adaptation',
+                    data: [50, 60, 65, 70, 80], // Rendements avec stratégie d'adaptation
+                    borderColor: 'rgba(255, 99, 132, 1)', // Rouge
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)', // Rouge translucide
+                    borderWidth: 2,
+                    fill: false
+                },
+                {
+                    label: 'Gestion de l\'eau',
+                    data: [45, 55, 60, 75, 85], // Rendements avec gestion de l'eau
+                    borderColor: 'rgba(54, 162, 235, 1)', // Bleu
+                    backgroundColor: 'rgba(54, 162, 235, 0.2)', // Bleu translucide
+                    borderWidth: 2,
+                    fill: false
+                }
+            ]
+        };
+    
+        // Configuration du graphique
+        const configAdaptation = {
+            type: 'line', // Graphique en courbe
+            data: dataAdaptation,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true
+                    },
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+    
+        // Création du graphique
+        const ctxAdaptation = document.getElementById('graphAdaptation').getContext('2d');
+        new Chart(ctxAdaptation, configAdaptation);
+    </script>
 
 
   
@@ -71,13 +172,72 @@
 
   <div class="aligned-section right-align">
 
-        <img src="photos/analyse 3.png" alt="Températures moyennes" class="content-image">
+    <canvas id="graphTempCultures" class="content-graph"></canvas>
 
         
 
-        <p>Ce graphique montre les températures moyennes relevées pour chaque type de culture, réparties par année. Il permet de visualiser les impacts du changement climatique sur les cultures principales dans différentes régions.</p>
+        <p>Ce graphique montre les températures moyennes relevées pour chaque type de culture, réparties par année. Il met en évidence les variations climatiques qui peuvent affecter de manière significative les rendements agricoles en fonction des conditions locales. Les cultures comme le blé et le riz, par exemple, présentent des tolérances différentes aux températures élevées ou basses, ce qui en fait un indicateur essentiel pour comprendre leur performance dans divers contextes géographiques. Cette analyse permet également de repérer les années où les températures ont été exceptionnellement élevées ou basses, offrant ainsi des pistes pour adapter les pratiques agricoles aux défis climatiques.
+
+        </p>
 
     </div>
+    <script>
+        // Données pour le graphique des températures moyennes
+        const labelsTemp = ['Année 1', 'Année 2', 'Année 3', 'Année 4', 'Année 5'];
+        const dataTemp = {
+            labels: labelsTemp,
+            datasets: [
+                {
+                    label: 'Culture de Blé',
+                    data: [15, 16, 15.5, 17, 18], // Températures pour la culture de Blé
+                    backgroundColor: 'rgba(0, 0, 0, 0.8)', // Noir translucide
+                    borderColor: 'rgba(0, 0, 0, 1)', // Noir
+                    borderWidth: 1
+                },
+                {
+                    label: 'Culture de Riz',
+                    data: [22, 23, 22.5, 24, 23], // Températures pour la culture de Riz
+                    backgroundColor: 'rgba(0, 0, 0, 0.5)', // Noir plus clair
+                    borderColor: 'rgba(0, 0, 0, 1)', // Noir
+                    borderWidth: 1
+                }
+            ]
+        };
+    
+        // Configuration du graphique
+        const configTemp = {
+            type: 'bar', // Graphique en barres
+            data: dataTemp,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Années'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Température Moyenne (°C)'
+                        }
+                    }
+                }
+            }
+        };
+    
+        // Création du graphique
+        const ctxTemp = document.getElementById('graphTempCultures').getContext('2d'); // Correction ici
+        new Chart(ctxTemp, configTemp);
+    </script>
 
 
     <!-- Titre et quatrième paragraphe à gauche avec image à droite -->
@@ -88,27 +248,83 @@
 
        
 
-        <p>Cette courbe retrace l'évolution des émissions de dioxyde de carbone liées à l'agriculture dans les principales régions étudiées. Elle permet de mesurer l'empreinte écologique et les efforts de réduction des émissions dans chaque zone.</p>
+        <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans les principales régions étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
 
-        <img src="photos/analyse 4.jpg" alt="Émissions de CO2" class="content-image">
+        <canvas id="graphCO2" class="content-graph"></canvas>
 
     </div>
-
+    <script>
+        // Données pour le graphique des émissions de CO2
+        const labelsCO2 = ['Année 1', 'Année 2', 'Année 3', 'Année 4', 'Année 5'];
+        const dataCO2 = {
+            labels: labelsCO2,
+            datasets: [
+                {
+                    label: 'Émissions de CO2 (millions de tonnes)',
+                    data: [300, 320, 310, 290, 280], // Valeurs des émissions de CO2
+                    borderColor: 'rgba(255, 0, 0, 1)', // Courbe rouge
+                    backgroundColor: 'rgba(255, 0, 0, 0.2)', // Rouge translucide pour le remplissage
+                    borderWidth: 2, // Épaisseur de la courbe
+                    fill: false // Pas de remplissage sous la courbe
+                }
+            ]
+        };
+    
+        // Configuration du graphique
+        const configCO2 = {
+            type: 'line', // Graphique en courbe
+            data: dataCO2,
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: 'top'
+                    }
+                },
+                scales: {
+                    x: {
+                        beginAtZero: false,
+                        title: {
+                            display: true,
+                            text: 'Années',
+                            color: 'black'
+                        }
+                    },
+                    y: {
+                        beginAtZero: true,
+                        title: {
+                            display: true,
+                            text: 'Émissions de CO2 (millions de tonnes)',
+                            color: 'black'
+                        }
+                    }
+                }
+            }
+        };
+    
+        // Création du graphique
+        const ctxCO2 = document.getElementById('graphCO2').getContext('2d');
+        new Chart(ctxCO2, configCO2);
+    </script>
 
     <!-- Dernier paragraphe sans titre, en gras -->
 
     <p class="final-paragraph">Les données montrent une corrélation entre l’augmentation des températures et la baisse des rendements agricoles dans certaines régions. Les stratégies d'adaptation, comme la rotation des cultures, ont prouvé leur efficacité pour
  atténuer ces impacts. Cependant, les émissions de CO2 restent un défi majeur pour l'agriculture durable.</p>
 
-    <a href="index2.php" class="button">Retour à l'accueil</a>
-    <footer>
-        <p>© 2024 - Tous droits réservés</p>
-    </footer>
+    <a href="index2.html" class="button">Retour à l'accueil</a>
 
 </section>
 
 
+   
 
+
+   <footer>
+
+       <p>© 2024 - Tous droits réservés</p>
+
+   </footer>
    <script>
     // Script JavaScript pour gérer la recherche
     document.getElementById('search-form').addEventListener('submit', function(event) {
