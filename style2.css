@@ -925,6 +925,6 @@ h1.page-illustration-title {
 
 #map {
   width: 1200px; /* Prend presque tout l'espace, moins les marges */
-  height: 500px;
+  height: 400px;
   margin: 0 auto;
 }
