@@ -916,3 +916,15 @@ h1.page-illustration-title {
   margin: 0 auto;      /* Centre le graphique horizontalement */
   display: block;      /* Assure que le graphique reste un élément de type bloc */
 }
+
+#myChart {
+   max-width: 300px;
+   max-height: 200px;
+   margin: auto; /* Centrer le diagramme si nécessaire */
+}
+
+#map {
+  width: 1200px; /* Prend presque tout l'espace, moins les marges */
+  height: 500px;
+  margin: 0 auto;
+}
