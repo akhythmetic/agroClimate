@@ -26,7 +26,7 @@
    <nav class="menu-horizontal">
       <ul>
           <li><a href="actualites.html">Actualités</a></li>
-          <li><a href="analyse.html">Analyses</a></li>
+          <li><a href="analyse.php">Analyses</a></li>
           <li><a href="illustrations.html">Visualisations</a></li>
           <li><a href="interviews.html">Interviews</a></li>
           <li><a href="connexion.html">Se connecter</a></li>
