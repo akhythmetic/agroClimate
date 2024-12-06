@@ -928,3 +928,15 @@ h1.page-illustration-title {
   height: 400px;
   margin: 0 auto;
 }
+/* Style pour les questions */
+.faq-item h2 a {
+    color: brown; /* Couleur marron pour le texte */
+    text-decoration: none; /* Pas de soulignement par défaut */
+    font-weight: bold; /* Texte en gras */
+    font-family: Arial, sans-serif; /* Police lisible */
+}
+
+.faq-item h2 a:hover {
+    color: darkorange; /* Changement de couleur au survol */
+    text-decoration: underline; /* Soulignement au survol */
+}
