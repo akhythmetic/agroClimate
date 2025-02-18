@@ -3,7 +3,7 @@
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Impact du Changement Climatique sur l'Agriculture</title>
+   <title>AgroClimate</title>
    <link rel="stylesheet" href="style2.css">
    <link rel="icon" href="photos/logosite.png" type="image/png">
    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -11,17 +11,82 @@
 
    <!-- Leaflet CSS et JS -->
    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-   <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
    <script src="https://unpkg.com/leaflet@1.9.1/dist/leaflet.js"></script>
    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
 </head>
+
+
 <body>
-   <header>
-      <form id="search-form">
-         <input type="text" id="searchInput" placeholder="Search..." aria-label="Barre de recherche">
-      </form>
-      <h1>L'IMPACT DU CHANGEMENT CLIMATIQUE SUR L'AGRICULTURE</h1>
-   </header>
+<header>
+   <form id="search-form">
+      <input type="text" id="searchInput" placeholder="Search..." aria-label="Barre de recherche">
+   </form>
+   <h1 id="title" style="font-family: 'Arial', sans-serif; font-size: 2.8rem; text-transform: capitalize; letter-spacing: 2px;">
+      AgroCLimate <br> 
+      <span style="font-size: 1.5rem; color: #333;">Impact du Changement Climatique sur l'Agriculture</span>
+   </h1>
+</header>
+   <style>
+   /* Styles pour les feuilles */
+   .leaf {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('https://upload.wikimedia.org/wikipedia/commons/3/36/Leaf_icon.svg') no-repeat center;
+      background-size: cover;
+      opacity: 0;
+      transform: scale(0.5);
+      animation: grow-leaf 0.5s forwards;
+   }
+
+   /* Animation pour les feuilles */
+   @keyframes grow-leaf {
+      0% {
+         opacity: 0;
+         transform: scale(0.5) translate(0, 0);
+      }
+      100% {
+         opacity: 1;
+         transform: scale(1) translate(calc(-50px + 100% * var(--x)), calc(-50px + 100% * var(--y)));
+      }
+   }
+</style>
+
+<script>
+   const title = document.getElementById("title");
+
+   // Fonction pour générer des feuilles
+   function createLeaves() {
+      const leafContainer = document.createElement("div");
+      leafContainer.style.position = "relative";
+
+      // Créer 4 feuilles
+      for (let i = 0; i < 4; i++) {
+         const leaf = document.createElement("span");
+         leaf.classList.add("leaf");
+
+         // Positionner chaque feuille autour du titre
+         leaf.style.setProperty("--x", i === 0 || i === 3 ? -1 : 1); // Gauche ou droite
+         leaf.style.setProperty("--y", i === 0 || i === 1 ? -1 : 1); // Haut ou bas
+
+         leafContainer.appendChild(leaf);
+      }
+      return leafContainer;
+   }
+
+   // Ajouter les feuilles lorsque la souris passe sur le titre
+   title.addEventListener("mouseover", () => {
+      if (!title.querySelector(".leaf")) {
+         const leaves = createLeaves();
+         title.appendChild(leaves);
+
+         // Retirer les feuilles après une courte durée
+         setTimeout(() => {
+            leaves.remove();
+         }, 1000); // Durée de l'animation
+      }
+   });
+</script>
 
    <nav class="menu-horizontal">
       <ul>
@@ -29,7 +94,7 @@
           <li><a href="analyse.php">Analyses</a></li>
           <li><a href="illustrations.html">Visualisations</a></li>
           <li><a href="interviews.html">Interviews</a></li>
-          <li><a href="connexion.html">Se connecter</a></li>
+          <li><a href="connexion.php">Se connecter</a></li>
           <li><a href="inscription.php">S'inscrire</a></li>
       </ul>
    </nav>
@@ -196,7 +261,7 @@
 
           //page d'analyses
           if (query === "analyse" || query === "analyses") {
-              window.location.href = "analyse.html"; 
+              window.location.href = "analyse.php"; 
           }
 
           //page d'illustrations
@@ -222,75 +287,76 @@
   fetch('getdataindex.php')
     .then(response => response.json())
     .then(data => {
-        // Vérification s'il y a une erreur
         if (data.error) {
             console.error("Erreur lors de la récupération des données : ", data.error);
             return;
         }
 
-        // Extraction des indices de santé des sols
         const indicesSanteSols = data.map(item => item.indice_sante_sols);
-
-        // Définition des noms des pays
         const pays = ['France', 'Canada', 'Nigeria', 'Argentina', 'China'];
 
-        // Création du graphique avec les données récupérées
         const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Création d'un gradient pour rendre le design plus esthétique
+        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
+        gradient.addColorStop(0, 'rgba(54, 162, 235, 1)');
+        gradient.addColorStop(1, 'rgba(255, 99, 132, 1)');
+
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: pays, // Utiliser les noms des pays
+                labels: pays,
                 datasets: [{
                     label: 'Indice de Santé des Sols',
                     data: indicesSanteSols,
-                    backgroundColor: [
-                        'rgba(255, 99, 132, 0.2)',
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 206, 86, 0.2)',
-                        'rgba(75, 192, 192, 0.2)',
-                        'rgba(153, 102, 255, 0.2)'
-                    ],
-                    borderColor: [
-                        'rgba(255, 99, 132, 1)',
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 206, 86, 1)',
-                        'rgba(75, 192, 192, 1)',
-                        'rgba(153, 102, 255, 1)'
-                    ],
-                    borderWidth: 1
+                    backgroundColor: gradient,
+                    borderColor: 'rgba(0, 0, 0, 0.1)',
+                    borderWidth: 1,
+                    borderRadius: 8, // Coins arrondis des barres
+                    barThickness: 40 // Épaisseur des barres
                 }]
             },
             options: {
                 responsive: true,
+                animation: {
+                    duration: 1500, // Animation fluide
+                    easing: 'easeInOutBounce'
+                },
                 plugins: {
                     legend: {
-                        position: 'top',
-                        labels: {
-                            boxWidth: 0 // Retire complètement l'icône dans la légende
-                        }
+                        display: false // Cacher la légende si inutile
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                // Récupérer le nom du pays et la valeur correspondante
-                                const pays = context.label; // Nom du pays
-                                const valeur = context.raw; // Valeur associée au bâton
-                                return `${pays} : ${valeur}`;
+                                return `${context.label} : ${context.raw}`;
                             }
                         }
                     }
                 },
                 scales: {
                     y: {
-                        beginAtZero: true
+                        beginAtZero: true,
+                        ticks: {
+                            stepSize: 10, // Contrôle des pas d'échelle
+                            font: { size: 14 }
+                        }
+                    },
+                    x: {
+                        ticks: {
+                            font: { size: 14 }
+                        }
                     }
                 }
             }
         });
     })
-    .catch(error => console.error("Erreur lors du fetch des données : ", error))
-
+    .catch(error => console.error("Erreur lors du fetch des données : ", error));
 </script>
+
+<h2>Prédictions vs Valeurs Réelles</h2>
+    <img src="{{ url_for('graph') }}" alt="Graphique des prédictions" />
+
 
 </body>
 </html>
