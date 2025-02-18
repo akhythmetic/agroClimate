@@ -19,277 +19,405 @@
     </header>
 
     <section class="main-content">
-    
         <p class="intro-text-actu">IMPACT DU CLIMAT SUR L’AGRICULTURE</p>
         <div class="aligned-section left-align">
-            <p>
-                Les précipitations jouent un rôle crucial dans l'agriculture en France, influençant directement la productivité des cultures et la disponibilité en eau pour l'irrigation. Ces dernières années, une baisse notable des taux de précipitations a été observée dans plusieurs régions françaises, exacerbant les défis agricoles.
-                
-                En Île-de-France, cette diminution a impacté les cultures céréalières, essentielles à la région, nécessitant une gestion accrue des ressources hydriques. Dans le Grand Est, connu pour ses vignobles, la sécheresse et le déficit hydrique compromettent la qualité des raisins et augmentent les coûts de production. La Nouvelle-Aquitaine, importante pour les cultures maraîchères et le maïs, subit une pression accrue sur ses systèmes d'irrigation, menaçant la durabilité des exploitations agricoles. Enfin, en Provence-Alpes-Côte d'Azur, région déjà marquée par un climat sec, la baisse des précipitations aggrave les risques de désertification et les incendies, réduisant la surface agricole utile.
-                
-                Ces changements climatiques nécessitent des stratégies d'adaptation telles que la diversification des cultures, des techniques d'irrigation efficientes et une gestion raisonnée des sols pour assurer la résilience du secteur agricole.</p>
-           
+            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
             <canvas id="graphImpactClimat" class="content-graph"></canvas>
         </div>
+        </section>
 
+        <!-- 1E GRAPHE -->
         <script>
-            
-            const labels = ['Ile-de-France', 'Grand Est', 'Nouvelle-Aquitaine', 'Provence-Alpes-Côte d\'Azur']; 
-            const data = {
+    const data = <?php
+        require_once 'bd.php'; 
+
+        $pdo = getBD();
+        $region = 'Grand Est';
+        $sql = "
+           SELECT annee AS annee, SUM(precipitations_totales) AS total_precipitation
+            FROM climat, pays
+            where region= :region
+            GROUP BY annee
+            ORDER BY annee ASC;
+        ";
+
+        $stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':region', $region, PDO::PARAM_STR);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        
+        echo json_encode($data);
+    ?>;
+
+    console.log(data); 
+    
+    const labels = data.map(item => item.annee);
+    const precipitations = data.map(item => item.total_precipitation);
+
+    document.addEventListener("DOMContentLoaded", function() {
+        const ctx = document.getElementById("graphImpactClimat").getContext("2d");
+        new Chart(ctx, {
+            type: "line",
+            data: {
                 labels: labels,
-                datasets: [
-                    {
-                        label: 'Précipitations 1999 (mm)',
-                        data: [1000, 900, 850, 800], 
-                        backgroundColor: 'rgba(75, 192, 192, 0.6)', 
-                        borderColor: 'rgba(75, 192, 192, 1)', 
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Précipitations 2019 (mm)',
-                        data: [850, 750, 720, 700], 
-                        backgroundColor: 'rgba(255, 99, 132, 0.6)', 
-                        borderColor: 'rgba(255, 99, 132, 1)', 
-                        borderWidth: 1
-                    }
-                ]
-            };
-
-           
-            const config = {
-                type: 'bar', 
-                data: data,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Précipitations (mm)'
-                            }
-                        }
-                    }
+                datasets: [{
+                    label: "Précipitations par année (mm)",
+                    data: precipitations,
+                    backgroundColor: "rgba(75, 192, 192, 0.6)",
+                    borderColor: "rgba(75, 192, 192, 1)",
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                responsive: true,
+                scales: {
+                    x: { title: { display: true, text: "Années" } },
+                    y: {
+            title: {
+                display: true,
+                text: "Précipitations (mm)"
+            },
+            beginAtZero: false, 
+            min: Math.min(...precipitations) * 0.9, 
+            max: Math.max(...precipitations) * 1.1 
+        }
                 }
-            };
+            }
+        });
+    });
+</script>
 
-            
-            const ctx = document.getElementById('graphImpactClimat').getContext('2d');
-            new Chart(ctx, config);
-        </script>
 
-       
+<section class="main-content">
+        <!-- Titre et deuxième paragraphe à droite avec image à gauche -->
         <p class="intro-text-actu">RENDEMENT AGRICOLE ET STRATÉGIES D’ADAPTATION</p>
         <div class="aligned-section right-align">
-            <canvas id="graphAdaptation" class="content-graph"></canvas>
-            <p>Les engrais chimiques et les pesticides jouent un rôle clé dans l'amélioration du rendement agricole en France. Les engrais enrichissent le sol en nutriments essentiels, tels que l'azote, le phosphore et le potassium, favorisant ainsi une croissance optimale des cultures. De leur côté, les pesticides protègent les cultures contre les maladies, les ravageurs et les mauvaises herbes, réduisant les pertes agricoles. L'utilisation raisonnée de ces intrants contribue à augmenter la productivité des terres agricoles, permettant de répondre aux besoins alimentaires croissants tout en maximisant les récoltes sur des surfaces limitées.</p>
-        </div>
-        <script>
-          
-            const dataAdaptation = {
-                labels: [0, 20, 40, 60, 80, 100], 
-                datasets: [
-                    {
-                        label: 'Rendement avec engrais chimiques (c/ha)',
-                        data: [5, 15, 35, 50, 65, 80], 
-                        borderColor: 'rgba(255, 99, 132, 1)', 
-                        backgroundColor: 'rgba(255, 99, 132, 0.2)', 
-                        borderWidth: 2,
-                        fill: false
-                    },
-                    {
-                        label: 'Rendement avec pesticides (c/ha)',
-                        data: [10, 25, 40, 55, 65, 70], 
-                        borderColor: 'rgba(54, 162, 235, 1)',
-                        backgroundColor: 'rgba(54, 162, 235, 0.2)', 
-                        borderWidth: 2,
-                        fill: false
-                    }
-                ]
-            };
-        
+            <canvas id="graphImpactRendement" class="content-graph"></canvas>
+            <p>Ce nuage de points met en relation l'impact économique et le rendement agricole en tonnes par hectare (MT/HA). On remarque une certaine corrélation positive : à mesure que l'impact économique augmente, le rendement agricole tend à être plus élevé. Cela pourrait indiquer que des investissements accrus dans les stratégies d'adaptation ou dans les infrastructures agricoles permettent d'améliorer la productivité des cultures.</p>
+            </div>
             
-            const configAdaptation = {
-                type: 'line', 
-                data: dataAdaptation,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            title: {
-                                display: true,
-                                text: 'Quantité d\'utilisation (kg/ha)'
-                            },
-                            type: 'linear', 
-                            min: 0, 
-                            max: 100, 
-                            ticks: {
-                                stepSize: 10, 
-                                callback: function(value) {
-                                    return value ; 
-                                }
-                            },
-                            beginAtZero: true
-                        },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Rendement agricole (c/ha)' 
-                            },
-                            beginAtZero: true
-                        }
-                    }
-                }
-            };
-        
            
-            const ctxAdaptation = document.getElementById('graphAdaptation').getContext('2d');
-            new Chart(ctxAdaptation, configAdaptation);
-        </script>
-        
-        
-        
 
-       
-        <p class="intro-text-actu">TEMPERATURES MOYENNES EN ARGENTINE</p>
-        <div class="aligned-section right-align">
-            <canvas id="graphTempCultures" class="content-graph"></canvas>
-            <p>En Argentine, les températures moyennes varient considérablement selon les régions, notamment dans les Pampas, la Patagonie, le Nord-Ouest et le Nord-Est. Cependant, une tendance globale à la hausse des températures a été observée au fil du temps, sous l'effet du changement climatique. Cette augmentation affecte directement l'agriculture, un secteur clé du pays. Dans les Pampas, cœur agricole de l'Argentine, la hausse des températures entraîne des stress hydriques et une réduction de la productivité des cultures. En Patagonie, le réchauffement modifie les cycles des cultures adaptées aux climats froids. Dans les régions du Nord-Ouest et du Nord-Est, où les températures sont déjà élevées, cette tendance exacerbe les défis liés à la gestion des ressources en eau et à la lutte contre les ravageurs. Ces évolutions soulignent l'importance d'adopter des pratiques agricoles résilientes face au climat.</p>
-        </div>
-        <script>
-            
-            const labelsTempCultures = ['Pampas', 'Patagonia', 'Northwest', 'Northeast']; 
-            const dataTempCultures = {
-                labels: labelsTempCultures,
-                datasets: [
-                    {
-                        label: 'Températures 2004 (°C)',
-                        data: [18, 12, 20, 25], 
-                        backgroundColor: 'rgba(169, 169, 169, 0.6)', 
-                        borderColor: 'rgba(169, 169, 169, 1)',
-                        borderWidth: 1
-                    },
-                    {
-                        label: 'Températures 2014 (°C)',
-                        data: [20, 15, 22, 28], 
-                        backgroundColor: 'rgba(0, 0, 0, 0.6)', 
-                        borderColor: 'rgba(0, 0, 0, 1)', 
-                        borderWidth: 1
-                    }
-                ]
-            };
+
+<!-- DEUXIÈME GRAPHE !!!!-->
+
+<script>
+    const dataImpactRendement = <?php  
+        try {
+            $pdo = getBD();
+            $sql = "SELECT pays.nom, AVG(agriculture.impact_economique) AS moyenne_impact, AVG(agriculture.rendement_agricole_MT_per_HA) AS moyenne_rendement 
+            FROM pays, environnement, agriculture 
+            WHERE pays.id_pays = agriculture.id_pays 
+            and agriculture.id_environnement = environnement.id_environnement 
+            GROUP BY pays.nom ORDER BY moyenne_impact ASC;";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $pays = [];
+            $moyenneImpact = [];
+            $moyenneRendement = [];
+
+            foreach ($data as $row) {
+                $pays[] = $row['nom'];
+                $moyenneImpact[] = $row['moyenne_impact'];
+                $moyenneRendement[] = $row['moyenne_rendement'];
+            }
+
+            echo json_encode([
+                'pays' => $pays,
+                'moyenneImpact' => $moyenneImpact,
+                'moyenneRendement' => $moyenneRendement
+            ]);
+        } catch (PDOException $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
         
-            
-            const configTempCultures = {
-                type: 'bar', 
-                data: dataTempCultures,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: true
-                        },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Températures moyennes (°C)' 
-                            }
-                        }
+    ?>;
+
+    if (dataImpactRendement.error) {
+        console.error("Erreur SQL:", dataImpactRendement.error);
+    } else {
+        const pays = dataImpactRendement.pays; 
+        const moyenneImpact = dataImpactRendement.moyenneImpact;
+        const moyenneRendement = dataImpactRendement.moyenneRendement;
+
+const configImpactRendement = {
+    type: "scatter",
+    data: {
+        datasets: [
+            {
+                label: "Impact économique vs Rendement",
+                data: moyenneRendement.map((rendement, index) => ({ x: moyenneImpact[index], y: rendement })),
+                borderColor: "rgba(255, 99, 132, 1)",
+                backgroundColor: "rgba(255, 99, 132, 0.2)",
+                borderWidth: 2,
+                fill: false,
+                pointRadius: 5
+            }
+        ]
+    },
+    options: {
+        responsive: true,
+        plugins: {
+            legend: {
+                position: "top"
+            },
+            tooltip: {
+                callbacks: {
+                    label: function(context) {
+                        return `${context.dataset.data[context.dataIndex].label}: ${context.formattedValue}`;
                     }
                 }
-            };
-        
-            
-            const ctxTempCultures = document.getElementById('graphTempCultures').getContext('2d');
-            new Chart(ctxTempCultures, configTempCultures);
-        </script>
+            },
+            annotation: {
+                annotations: moyenneRendement.map((rendement, index) => ({
+                    type: "label",
+                    xValue: moyenneImpact[index],
+                    yValue: rendement,
+                    content: pays[index],
+                    fontSize: 12,
+                    fontColor: "black"
+                }))
+            }
+        },
+        scales: {
+            x: {
+                title: {
+                    display: true,
+                    text: "Impact économique"
+                },
+                type: "linear",
+                min: Math.min(...moyenneImpact) * 0.9, 
+                max: Math.max(...moyenneImpact) * 1.1, 
+                beginAtZero: false
+            },
+            y: {
+                title: {
+                    display: true,
+                    text: "Rendement agricole (MT/HA)"
+                },
+                min: Math.min(...moyenneRendement) * 0.9, 
+                max: Math.max(...moyenneRendement) * 1.1, 
+                beginAtZero: false
+            }
+        }
+    }
+};
+        const ctxImpactRendement = document.getElementById("graphImpactRendement").getContext("2d");
+        new Chart(ctxImpactRendement, configImpactRendement);
+    }
+</script>
+
         
         
 
-
-        
-        <p class="intro-text-actu">ÉVOLUTION DES ÉMISSIONS DE CO2 EN RUSSIE</p>
+        <!-- Titre et troisième paragraphe à droite avec image à gauche -->
+        <p class="intro-text-actu">TEMPÉRATURES MOYENNES PAR CULTURE ET ANNÉE</p>
         <div class="aligned-section left-align">
-            <p>Cette courbe illustre l'évolution des émissions de CO2 en Russie montrant une tendance générale à la hausse au fil des années, en grande partie en raison de son économie fortement dépendante des énergies fossiles, notamment le charbon, le gaz naturel, et le pétrole. Cette augmentation des émissions contribue au réchauffement climatique, qui a des répercussions significatives sur l'agriculture. En Russie, les changements climatiques engendrés par les émissions de CO2 ont entraîné des variations des températures, une modification des cycles de précipitations et une augmentation de la fréquence des événements climatiques extrêmes. Ces facteurs affectent la productivité agricole, modifient les saisons de culture et augmentent les risques de perte des récoltes, posant des défis pour la sécurité alimentaire et la durabilité des systèmes agricoles.</p>
+            <p>Ce graphique illustre la relation entre la température moyenne et l’indice de santé des sols. Il semble que l’indice de santé des sols reste relativement stable malgré les variations de température, bien que l'on observe une certaine dispersion des points. Cela suggère que d'autres facteurs, tels que les pratiques agricoles, l'humidité du sol et la gestion des ressources, jouent un rôle crucial dans la préservation de la qualité des sols.</p>
+            <canvas id="graphTempCultures" class="content-graph"></canvas>
+        </div>
+        
+
+        <!-- TROISIÈME GRAPHE !!! -->
+        <canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dataTemperatureSanteSols = <?php  
+        try {
+            $pdo = getBD();
+            $sql = "SELECT temperature_moyenne, indice_sante_sols, pays.nom 
+            FROM climat, environnement, agriculture, pays 
+            WHERE pays.nom = 'China' 
+            AND agriculture.id_environnement = environnement.id_environnement 
+            AND agriculture.id_agriculture = climat.id_agriculture 
+            and agriculture.id_pays = pays.id_pays 
+            ORDER BY temperature_moyenne ASC;";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $temperatureMoyenne = [];
+            $indiceSanteSols = [];
+
+            foreach ($data as $row) {
+                $temperatureMoyenne[] = $row['temperature_moyenne'];
+                $indiceSanteSols[] = $row['indice_sante_sols'];
+            }
+
+            echo json_encode([
+                'temperatureMoyenne' => $temperatureMoyenne,
+                'indiceSanteSols' => $indiceSanteSols
+            ]);
+        } catch (PDOException $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        
+    ?>;
+
+    if (dataTemperatureSanteSols.error) {
+        console.error("Erreur SQL:", dataTemperatureSanteSols.error);
+    } else {
+        const labelsTemperature = dataTemperatureSanteSols.temperatureMoyenne; 
+        const labelsSanteSols = dataTemperatureSanteSols.indiceSanteSols; 
+
+        const configTemperatureSanteSols = {
+            type: "scatter",
+            data: {
+                labels: labelsTemperature, 
+                datasets: [
+                    {
+                        label: "Indice de santé des sols en fonction de la température",
+                        data: labelsSanteSols,
+                        borderColor: "rgba(255, 99, 132, 1)",
+                        backgroundColor: "rgba(255, 99, 132, 0.2)",
+                        borderWidth: 2,
+                        fill: false
+                    }
+                ]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top"
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Température moyenne (°C)"
+                        },
+                        type: "linear",
+                        min: Math.min(...labelsTemperature) * 0.9, 
+                        max: Math.max(...labelsTemperature) * 1.1, 
+                        beginAtZero: false
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Indice de santé des sols"
+                        },
+                        min: Math.min(...labelsSanteSols) * 0.9, 
+                        max: Math.max(...labelsSanteSols) * 1.1, 
+                        beginAtZero: false
+                    }
+                }
+            }
+        };
+
+        const ctxTemperatureSanteSols = document.getElementById("graphTemperatureSanteSols").getContext("2d");
+        new Chart(ctxTemperatureSanteSols, configTemperatureSanteSols);
+    }
+</script>
+        
+        
+
+
+        <!-- Titre et quatrième paragraphe à gauche avec image à droite -->
+        <p class="intro-text-actu">ÉVOLUTION DES ÉMISSIONS DE CO2</p>
+        <div class="aligned-section left-align">
+            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans les principales régions étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
             <canvas id="graphCO2" class="content-graph"></canvas>
         </div>
-        <script>
-            
-            const labelsCO2 = ['1990', '1995', '2000', '2005', '2010'];
-            const dataCO2 = {
-                labels: labelsCO2,
+       
+        <!-- QUATRIÈME GRAPHE -->
+<canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+    const dataEmissionsCO2Moyenne = <?php  
+        try {
+            $pdo = getBD();
+            $sql = "SELECT pays.nom, AVG(pays.CO2_emissions_MT) AS moyenne_emissions 
+                    FROM pays 
+                    GROUP BY pays.nom 
+                    ORDER BY moyenne_emissions DESC;";
+
+            $stmt = $pdo->prepare($sql);
+            $stmt->execute();
+            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+            $pays = [];
+            $moyenneEmissions = [];
+
+            foreach ($data as $row) {
+                $pays[] = $row['nom'];
+                $moyenneEmissions[] = $row['moyenne_emissions'];
+            }
+
+            echo json_encode([
+                'pays' => $pays,
+                'moyenneEmissions' => $moyenneEmissions
+            ]);
+        } catch (PDOException $e) {
+            echo json_encode(['error' => $e->getMessage()]);
+        }
+        
+    ?>;
+
+    if (dataEmissionsCO2Moyenne.error) {
+        console.error("Erreur SQL:", dataEmissionsCO2Moyenne.error);
+    } else {
+        const labelsPays = dataEmissionsCO2Moyenne.pays; 
+        const moyenneEmissions = dataEmissionsCO2Moyenne.moyenneEmissions; 
+
+        const configEmissionsCO2Moyenne = {
+            type: "bar",
+            data: {
+                labels: labelsPays, 
                 datasets: [
                     {
-                        label: 'Émissions de CO2 (millions de tonnes)',
-                        data: [70, 180, 290, 320, 370], 
-                        borderColor: 'rgba(255, 0, 0, 1)',
-                        backgroundColor: 'rgba(255, 0, 0, 0.2)', 
-                        borderWidth: 2, 
-                        fill: false 
+                        label: "Moyenne des émissions de CO2",
+                        data: moyenneEmissions,
+                        borderColor: "rgb(24, 119, 7)",
+                        backgroundColor: "rgb(24, 119, 7)",
+                        borderWidth: 2,
+                        fill: false
                     }
                 ]
-            };
-
-            
-            const configCO2 = {
-                type: 'line', 
-                data: dataCO2,
-                options: {
-                    responsive: true,
-                    plugins: {
-                        legend: {
-                            position: 'top'
-                        }
-                    },
-                    scales: {
-                        x: {
-                            beginAtZero: false,
-                            title: {
-                                display: true,
-                                text: 'Années',
-                                color: 'black'
-                            }
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        position: "top"
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: "Pays"
                         },
-                        y: {
-                            beginAtZero: true,
-                            title: {
-                                display: true,
-                                text: 'Émissions de CO2 (millions de tonnes)',
-                                color: 'black'
-                            }
-                        }
+                        type: "category",
+                        beginAtZero: true
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: "Moyenne des émissions de CO2 (MT)"
+                        },
+                        min: Math.min(...moyenneEmissions) * 0.9, 
+                        max: Math.max(...moyenneEmissions) * 1.1, 
+                        beginAtZero: false
                     }
                 }
-            };
+            }
+        };
 
-           
-            const ctxCO2 = document.getElementById('graphCO2').getContext('2d');
-            new Chart(ctxCO2, configCO2);
-        </script>
+        const ctxEmissionsCO2Moyenne = document.getElementById("graphEmissionsCO2Moyenne").getContext("2d");
+        new Chart(ctxEmissionsCO2Moyenne, configEmissionsCO2Moyenne);
+    }
+</script>
 
-       
-        <p class="final-paragraph">Les données montrent une corrélation entre l’augmentation des températures et la baisse des rendements agricoles dans certaines régions. Les stratégies d'adaptation, comme l'utilisation des produits chimiques, ont prouvé leur efficacité pour atténuer ces impacts. Cependant, les émissions de CO2 restent un défi majeur pour l'agriculture durable.</p>
+        <p class="final-paragraph">Les données montrent une corrélation entre l’augmentation des températures et la baisse des rendements agricoles dans certaines régions. Les stratégies d'adaptation, comme la rotation des cultures, ont prouvé leur efficacité pour atténuer ces impacts. Cependant, les émissions de CO2 restent un défi majeur pour l'agriculture durable.</p>
 
-        <a href="index2.html" class="button">Retour à l'accueil</a>
+        <a href="index2.php" class="button">Retour à l'accueil</a>
     </section>
 
     <footer>
