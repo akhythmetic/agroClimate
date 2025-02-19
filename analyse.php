@@ -217,7 +217,7 @@ const configImpactRendement = {
         <!-- Titre et troisième paragraphe à droite avec image à gauche -->
         <p class="intro-text-actu">LIEN ENTRE TEMPRÉATURE ET INDICE DE SANTE DES SOLS ?</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique illustre la relation entre la température moyenne et l’indice de santé des sols. Il semble que l’indice de santé des sols reste relativement stable malgré les variations de température, bien que l'on observe une certaine dispersion des points. Cela suggère que d'autres facteurs, tels que les pratiques agricoles, l'humidité du sol et la gestion des ressources, jouent un rôle crucial dans la préservation de la qualité des sols.</p>
+            <p>Ce graphique montre l’indice de santé des sols en fonction de la température pour plusieurs pays. On observe que le Brésil, le Canada et le Nigeria ont des indices élevés, tandis que des pays comme le Canada et l’Argentine affichent des valeurs plus basses. Cette variation peut être liée aux conditions climatiques, aux précipitations et aux pratiques agricoles. Les pays tropicaux semblent bénéficier de sols en meilleure santé, contrairement aux régions plus froides. L’épuisement des terres, la déforestation ou l’exploitation agricole peuvent aussi expliquer ces disparités. Une analyse plus approfondie intégrant l’humidité et la qualité des sols permettrait de confirmer ces observations.</p>
             <canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
         </div>
         
