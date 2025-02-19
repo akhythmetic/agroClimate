@@ -222,90 +222,70 @@ const configImpactRendement = {
         </div>
         
 
-        <!-- TROISIÈME GRAPHE !!! -->
-        <canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
+       <!-- CANVAS -->
+<canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
+
+<!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<!-- SCRIPT PHP POUR RÉCUPÉRER LES DONNÉES -->
 <script>
-    const dataTemperatureSanteSols = <?php  
-        try {
-            $pdo = getBD();
-            $sql = "SELECT temperature_moyenne, indice_sante_sols, pays.nom 
-            FROM climat, environnement, agriculture, pays 
-            WHERE pays.nom = 'China' 
-            AND agriculture.id_environnement = environnement.id_environnement 
-            AND agriculture.id_agriculture = climat.id_agriculture 
-            and agriculture.id_pays = pays.id_pays 
-            ORDER BY temperature_moyenne ASC;";
+    const dataTemperatureSanteSols = <?php
+    try {
+        $pdo = getBD();
+        $sql = "SELECT pays.nom, AVG(temperature_moyenne) as temperature_moyenne, AVG(indice_sante_sols) as indice_sante_sols
+                FROM climat, environnement, agriculture, pays
+                WHERE agriculture.id_environnement = environnement.id_environnement
+                AND agriculture.id_agriculture = climat.id_agriculture
+                AND agriculture.id_pays = pays.id_pays
+                GROUP BY pays.nom
+                ORDER BY COUNT(pays.nom) DESC
+                LIMIT 15;";
 
-            $stmt = $pdo->prepare($sql);
-            $stmt->execute();
-            $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute();
+        $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-            $temperatureMoyenne = [];
-            $indiceSanteSols = [];
-
-            foreach ($data as $row) {
-                $temperatureMoyenne[] = $row['temperature_moyenne'];
-                $indiceSanteSols[] = $row['indice_sante_sols'];
-            }
-
-            echo json_encode([
-                'temperatureMoyenne' => $temperatureMoyenne,
-                'indiceSanteSols' => $indiceSanteSols
-            ]);
-        } catch (PDOException $e) {
-            echo json_encode(['error' => $e->getMessage()]);
-        }
-        
+        echo json_encode($data);
+    } catch (PDOException $e) {
+        echo json_encode(['error' => $e->getMessage()]);
+    }
     ?>;
 
     if (dataTemperatureSanteSols.error) {
         console.error("Erreur SQL:", dataTemperatureSanteSols.error);
     } else {
-        const labelsTemperature = dataTemperatureSanteSols.temperatureMoyenne; 
-        const labelsSanteSols = dataTemperatureSanteSols.indiceSanteSols; 
+        const labelsPays = dataTemperatureSanteSols.map(pays => pays.nom);
+        const labelsTemperature = dataTemperatureSanteSols.map(pays => pays.temperature_moyenne);
+        const labelsSanteSols = dataTemperatureSanteSols.map(pays => pays.indice_sante_sols);
 
         const configTemperatureSanteSols = {
-            type: "scatter",
+            type: "bar",
             data: {
-                labels: labelsTemperature, 
+                labels: labelsPays,
                 datasets: [
                     {
                         label: "Indice de santé des sols en fonction de la température",
                         data: labelsSanteSols,
                         borderColor: "rgba(255, 99, 132, 1)",
                         backgroundColor: "rgba(255, 99, 132, 0.2)",
-                        borderWidth: 2,
-                        fill: false
+                        borderWidth: 2
                     }
                 ]
             },
             options: {
                 responsive: true,
                 plugins: {
-                    legend: {
-                        position: "top"
-                    }
+                    legend: { position: "top" }
                 },
                 scales: {
                     x: {
-                        title: {
-                            display: true,
-                            text: "Température moyenne (°C)"
-                        },
-                        type: "linear",
-                        min: Math.min(...labelsTemperature) * 0.9, 
-                        max: Math.max(...labelsTemperature) * 1.1, 
-                        beginAtZero: false
+                        title: { display: true, text: "Pays" },
+                        type: "category"
                     },
                     y: {
-                        title: {
-                            display: true,
-                            text: "Indice de santé des sols"
-                        },
-                        min: Math.min(...labelsSanteSols) * 0.9, 
-                        max: Math.max(...labelsSanteSols) * 1.1, 
-                        beginAtZero: false
+                        title: { display: true, text: "Indice de santé des sols" },
+                        min: Math.min(...labelsSanteSols) * 0.9
                     }
                 }
             }
@@ -315,6 +295,7 @@ const configImpactRendement = {
         new Chart(ctxTemperatureSanteSols, configTemperatureSanteSols);
     }
 </script>
+
         
         
 
