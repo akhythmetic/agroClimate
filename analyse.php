@@ -19,9 +19,9 @@
     </header>
 
     <section class="main-content">
-        <p class="intro-text-actu">IMPACT DU CLIMAT SUR L’AGRICULTURE</p>
+        <p class="intro-text-actu">Évolution des précipitations dans la région Grand Est au cours des années</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
+            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies dans la région Grand Est en France. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
             <canvas id="graphImpactClimat" class="content-graph"></canvas>
         </div>
         </section>
@@ -91,7 +91,7 @@
 
 <section class="main-content">
         <!-- Titre et deuxième paragraphe à droite avec image à gauche -->
-        <p class="intro-text-actu">RENDEMENT AGRICOLE ET STRATÉGIES D’ADAPTATION</p>
+        <p class="intro-text-actu">L'IMPACT DE L'ÉCONOMIE SUR LE RENDEMENT AGRICOLE</p>
         <div class="aligned-section right-align">
             <canvas id="graphImpactRendement" class="content-graph"></canvas>
             <p>Ce nuage de points met en relation l'impact économique et le rendement agricole en tonnes par hectare (MT/HA). On remarque une certaine corrélation positive : à mesure que l'impact économique augmente, le rendement agricole tend à être plus élevé. Cela pourrait indiquer que des investissements accrus dans les stratégies d'adaptation ou dans les infrastructures agricoles permettent d'améliorer la productivité des cultures.</p>
@@ -210,22 +210,25 @@ const configImpactRendement = {
         new Chart(ctxImpactRendement, configImpactRendement);
     }
 </script>
-
+</section>
         
         
-
+<section class="main-content">
         <!-- Titre et troisième paragraphe à droite avec image à gauche -->
-        <p class="intro-text-actu">TEMPÉRATURES MOYENNES PAR CULTURE ET ANNÉE</p>
+        <p class="intro-text-actu">LIEN ENTRE TEMPRÉATURE ET INDICE DE SANTE DES SOLS ?</p>
         <div class="aligned-section left-align">
             <p>Ce graphique illustre la relation entre la température moyenne et l’indice de santé des sols. Il semble que l’indice de santé des sols reste relativement stable malgré les variations de température, bien que l'on observe une certaine dispersion des points. Cela suggère que d'autres facteurs, tels que les pratiques agricoles, l'humidité du sol et la gestion des ressources, jouent un rôle crucial dans la préservation de la qualité des sols.</p>
-            <canvas id="graphTempCultures" class="content-graph"></canvas>
+            <canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
         </div>
         
+        
 
-       <!-- CANVAS -->
-<canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
+        <!-- TROISIÈME GRAPHE !!! -->
+        
 
-<!-- CHART.JS -->
+
+
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- SCRIPT PHP POUR RÉCUPÉRER LES DONNÉES -->
@@ -303,13 +306,12 @@ const configImpactRendement = {
         <!-- Titre et quatrième paragraphe à gauche avec image à droite -->
         <p class="intro-text-actu">ÉVOLUTION DES ÉMISSIONS DE CO2</p>
         <div class="aligned-section left-align">
-            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans différents pays 
-                 étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
-            <canvas id="graphCO2" class="content-graph"></canvas>
+        <canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
+            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans les principales régions étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
         </div>
        
         <!-- QUATRIÈME GRAPHE -->
-<canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const dataEmissionsCO2Moyenne = <?php  
