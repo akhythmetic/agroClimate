@@ -19,9 +19,9 @@
     </header>
 
     <section class="main-content">
-        <p class="intro-text-actu">Évolution des précipitations dans la région Grand Est au cours des années</p>
+        <p class="intro-text-actu">IMPACT DU CLIMAT SUR L’AGRICULTURE</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies dans la région Grand Est en France. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
+            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
             <canvas id="graphImpactClimat" class="content-graph"></canvas>
         </div>
         </section>
@@ -91,7 +91,7 @@
 
 <section class="main-content">
         <!-- Titre et deuxième paragraphe à droite avec image à gauche -->
-        <p class="intro-text-actu">L'IMPACT DE L'ÉCONOMIE SUR LE RENDEMENT AGRICOLE</p>
+        <p class="intro-text-actu">RENDEMENT AGRICOLE ET STRATÉGIES D’ADAPTATION</p>
         <div class="aligned-section right-align">
             <canvas id="graphImpactRendement" class="content-graph"></canvas>
             <p>Ce nuage de points met en relation l'impact économique et le rendement agricole en tonnes par hectare (MT/HA). On remarque une certaine corrélation positive : à mesure que l'impact économique augmente, le rendement agricole tend à être plus élevé. Cela pourrait indiquer que des investissements accrus dans les stratégies d'adaptation ou dans les infrastructures agricoles permettent d'améliorer la productivité des cultures.</p>
@@ -210,37 +210,39 @@ const configImpactRendement = {
         new Chart(ctxImpactRendement, configImpactRendement);
     }
 </script>
-</section>
+
         
         
-<section class="main-content">
+
         <!-- Titre et troisième paragraphe à droite avec image à gauche -->
-        <p class="intro-text-actu">LIEN ENTRE TEMPRÉATURE ET INDICE DE SANTE DES SOLS ?</p>
+        <p class="intro-text-actu">TEMPÉRATURES MOYENNES PAR CULTURE ET ANNÉE</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique montre l’indice de santé des sols en fonction de la température pour plusieurs pays. On observe que le Brésil, le Canada et le Nigeria ont des indices élevés, tandis que des pays comme le Canada et l’Argentine affichent des valeurs plus basses. Cette variation peut être liée aux conditions climatiques, aux précipitations et aux pratiques agricoles. Les pays tropicaux semblent bénéficier de sols en meilleure santé, contrairement aux régions plus froides. L’épuisement des terres, la déforestation ou l’exploitation agricole peuvent aussi expliquer ces disparités. Une analyse plus approfondie intégrant l’humidité et la qualité des sols permettrait de confirmer ces observations.</p>
-            <canvas id="graphTemperatureSanteSols" class="content-graph"></canvas>
+            <p>Ce graphique en barres groupées représente la température moyenne (en bleu) et le rendement agricole (en orange) en 1990 pour les 10 pays les plus présents dans les données. On observe une tendance où une augmentation de la température moyenne semble être associée à une hausse du rendement agricole. Cette corrélation positive pourrait s'expliquer par le fait que certaines cultures bénéficient de températures plus élevées, favorisant leur croissance. Cependant, cette relation peut varier selon les régions, les types de cultures et les conditions climatiques spécifiques. D’autres facteurs comme l’irrigation et les avancées technologiques agricoles peuvent aussi influencer cette tendance.</p>
+            <canvas id="graphTempCultures" class="content-graph"></canvas>
         </div>
-        
-        
 
-        <!-- TROISIÈME GRAPHE !!! -->
+
         
 
+       <!-- CANVAS -->
+<canvas id="graphTemperatureRendement" class="content-graph"></canvas>
 
-
-
+<!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <!-- SCRIPT PHP POUR RÉCUPÉRER LES DONNÉES -->
 <script>
-    const dataTemperatureSanteSols = <?php
+    const dataTemperatureRendement = <?php
     try {
         $pdo = getBD();
-        $sql = "SELECT pays.nom, AVG(temperature_moyenne) as temperature_moyenne, AVG(indice_sante_sols) as indice_sante_sols
-                FROM climat, environnement, agriculture, pays
-                WHERE agriculture.id_environnement = environnement.id_environnement
-                AND agriculture.id_agriculture = climat.id_agriculture
-                AND agriculture.id_pays = pays.id_pays
+        $sql = "SELECT pays.nom, 
+                       AVG(climat.temperature_moyenne) AS temperature_moyenne, 
+                       AVG(agriculture.rendement_agricole_MT_per_HA) AS rendement_agricole
+                FROM climat
+                JOIN agriculture ON climat.id_agriculture = agriculture.id_agriculture
+                JOIN pays ON agriculture.id_pays = pays.id_pays
+                WHERE climat.annee = 1990 
+                AND agriculture.annee = 1990
                 GROUP BY pays.nom
                 ORDER BY COUNT(pays.nom) DESC
                 LIMIT 15;";
@@ -255,24 +257,31 @@ const configImpactRendement = {
     }
     ?>;
 
-    if (dataTemperatureSanteSols.error) {
-        console.error("Erreur SQL:", dataTemperatureSanteSols.error);
+    if (dataTemperatureRendement.error) {
+        console.error("Erreur SQL:", dataTemperatureRendement.error);
     } else {
-        const labelsPays = dataTemperatureSanteSols.map(pays => pays.nom);
-        const labelsTemperature = dataTemperatureSanteSols.map(pays => pays.temperature_moyenne);
-        const labelsSanteSols = dataTemperatureSanteSols.map(pays => pays.indice_sante_sols);
+        const labelsPays = dataTemperatureRendement.map(pays => pays.nom);
+        const temperatureMoyenne = dataTemperatureRendement.map(pays => pays.temperature_moyenne);
+        const rendementAgricole = dataTemperatureRendement.map(pays => pays.rendement_agricole);
 
-        const configTemperatureSanteSols = {
+        const configTemperatureRendement = {
             type: "bar",
             data: {
                 labels: labelsPays,
                 datasets: [
                     {
-                        label: "Indice de santé des sols en fonction de la température",
-                        data: labelsSanteSols,
-                        borderColor: "rgba(255, 99, 132, 1)",
-                        backgroundColor: "rgba(255, 99, 132, 0.2)",
-                        borderWidth: 2
+                        label: "Température Moyenne (°C) - 1990",
+                        data: temperatureMoyenne,
+                        backgroundColor: "rgba(54, 162, 235, 0.6)",  // Bleu
+                        borderColor: "rgba(54, 162, 235, 1)",
+                        borderWidth: 1
+                    },
+                    {
+                        label: "Rendement Agricole (MT/HA) - 1990",
+                        data: rendementAgricole,
+                        backgroundColor: "rgba(255, 159, 64, 0.6)", // Orange
+                        borderColor: "rgba(255, 159, 64, 1)",
+                        borderWidth: 1
                     }
                 ]
             },
@@ -287,17 +296,20 @@ const configImpactRendement = {
                         type: "category"
                     },
                     y: {
-                        title: { display: true, text: "Indice de santé des sols" },
-                        min: Math.min(...labelsSanteSols) * 0.9
+                        title: { display: true, text: "Valeurs" },
+                        beginAtZero: true
                     }
                 }
             }
         };
 
-        const ctxTemperatureSanteSols = document.getElementById("graphTemperatureSanteSols").getContext("2d");
-        new Chart(ctxTemperatureSanteSols, configTemperatureSanteSols);
+        const ctxTemperatureRendement = document.getElementById("graphTemperatureRendement").getContext("2d");
+        new Chart(ctxTemperatureRendement, configTemperatureRendement);
     }
 </script>
+
+
+
 
         
         
@@ -306,12 +318,13 @@ const configImpactRendement = {
         <!-- Titre et quatrième paragraphe à gauche avec image à droite -->
         <p class="intro-text-actu">ÉVOLUTION DES ÉMISSIONS DE CO2</p>
         <div class="aligned-section left-align">
-        <canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
-            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans les principales régions étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
+            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans différents pays 
+                 étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
+            <canvas id="graphCO2" class="content-graph"></canvas>
         </div>
        
         <!-- QUATRIÈME GRAPHE -->
-
+<canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const dataEmissionsCO2Moyenne = <?php  
