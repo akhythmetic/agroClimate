@@ -932,3 +932,127 @@ body {
 .aligned-section p {
   width: 50%;
 }
+
+/* Style général du formulaire pour la page prediction1.php */
+.pred-form {
+  width: 100%;
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  display: block;
+     
+}
+
+.pred-form label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #333;
+}
+
+.pred-form input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.pred-form input[type="number"]:focus {
+  border-color: #5e8b7e;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.pred-form button {
+  width: 100%;
+  padding: 10px;
+  background: #5e8b7e;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.pred-form button:hover {
+  background: #5e8b7e;
+}
+
+@media (max-width: 500px) {
+  .pred-form {
+      width: 90%;
+      padding: 15px;
+  }
+}
+
+/* Appliquer les styles d'animation uniquement à prediction1.php */
+.prediction-page {
+  animation: day-cycle 10s linear infinite alternate;
+  overflow: hidden;
+  position: relative;
+}
+
+@keyframes sun-move {
+  from { left: 10%; top: 50px; }
+  to { left: 80%; top: 100px; }
+}
+
+/* Pluie */
+.prediction-page .raindrop {
+  position: absolute;
+  width: 2px;
+  height: 10px;
+  background: rgba(255, 255, 255, 0.8);
+  animation: rain-fall 1s linear infinite, rain-disappear 10s linear infinite alternate;
+}
+
+@keyframes rain-fall {
+  from { transform: translateY(-10px); opacity: 1; }
+  to { transform: translateY(100vh); opacity: 0; }
+}
+
+/* Responsive Design */
+@media (max-width: 500px) {
+  .pred-form {
+      width: 90%;
+      padding: 15px;
+  }
+}
+@keyframes day-cycle {
+  0% { background: #0a1f44; } /* Nuit (bleu foncé) */
+  50% { background: #87CEFA; } /* Transition (matin) */
+  100% { background: #FFD700; } /* Jour (doré) */
+}
+
+@keyframes sun-rise {
+  0% { top: 90%; left: 10%; opacity: 0; } /* Soleil caché */
+  50% { top: 50%; left: 50%; opacity: 1; } /* Soleil au milieu */
+  100% { top: 20%; left: 80%; opacity: 1; } /* Soleil levé */
+}
+
+.prediction-page .sun {
+  width: 80px;
+  height: 80px;
+  background: yellow;
+  border-radius: 50%;
+  position: absolute;
+  top: 90%;
+  left: 10%;
+  opacity: 0;
+  animation: sun-rise 10s linear infinite alternate;
+}
+
+@keyframes rain-disappear {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 0; } /* Pluie disparaît */
+}
+
+
