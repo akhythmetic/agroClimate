@@ -25,8 +25,7 @@
    </h1>
 </header>
 
-</header>
-    <div class="pred-form"
+    <div class="pred-form">
     <form>
         <label>Température (°C) :</label>
         <input type="number" id="temperature" name="temperature" step="0.1" required><br>
@@ -65,18 +64,23 @@
             })
             .then(response => {
                 if (!response.ok) {
-                    throw new Error("Problème avec le serveur Flask.");
+                    throw new Error("Erreur serveur : " + response.statusText);
                 }
                 return response.json();
             })
             .then(data => {
-                document.getElementById("result").innerHTML = 
+                if (data.error) {
+                    document.getElementById("result").innerHTML = "Erreur : " + data.error;
+                } else {
+                    document.getElementById("result").innerHTML = 
                     "Rendement estimé : " + data.prediction.toFixed(2) + " MT/ha";
+                }
             })
             .catch(error => {
                 document.getElementById("result").innerHTML = "Erreur : " + error.message;
                 console.error("Erreur :", error);
             });
+
         }
     </script>
 <script>
