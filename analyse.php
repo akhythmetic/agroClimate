@@ -217,7 +217,7 @@ const configImpactRendement = {
         <!-- Titre et troisième paragraphe à droite avec image à gauche -->
         <p class="intro-text-actu">TEMPÉRATURES MOYENNES PAR CULTURE ET ANNÉE</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique en barres groupées représente la température moyenne (en bleu) et le rendement agricole (en orange) en 1990 pour les 10 pays les plus présents dans les données. On observe une tendance où une augmentation de la température moyenne semble être associée à une hausse du rendement agricole. Cette corrélation positive pourrait s'expliquer par le fait que certaines cultures bénéficient de températures plus élevées, favorisant leur croissance. Cependant, cette relation peut varier selon les régions, les types de cultures et les conditions climatiques spécifiques. D’autres facteurs comme l’irrigation et les avancées technologiques agricoles peuvent aussi influencer cette tendance.</p>
+            <p>Le graphique illustre l’évolution des températures moyennes entre 1990 et 2024 pour l’Australie, la Chine et le Nigeria, trois pays parmi les plus représentés dans les données. On observe une forte variabilité, notamment en Australie, avec des pics dépassant les 22°C autour de 2019, période marquée par des sécheresses extrêmes affectant gravement les récoltes. En Chine, bien que les températures soient plus modérées, des fluctuations accrues après les années 2000 rendent les saisons agricoles moins prévisibles, perturbant les rendements. Le Nigeria, quant à lui, connaît des variations soudaines qui fragilisent l’agriculture locale, souvent dépendante des conditions climatiques stables. Globalement, cette instabilité thermique nuit à la planification agricole, réduit la productivité et accroît les risques de pertes de récoltes. Ainsi, l’élévation des températures et leur irrégularité ont un impact direct et négatif sur le rendement agricole dans ces régions.</p>
             <canvas id="graphTempCultures" class="content-graph"></canvas>
         </div>
 
@@ -230,25 +230,36 @@ const configImpactRendement = {
 <!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<!-- SCRIPT PHP POUR RÉCUPÉRER LES DONNÉES -->
 <script>
-    const dataTemperatureRendement = <?php
+    const dataTemperature = <?php
     try {
         $pdo = getBD();
-        $sql = "SELECT pays.nom, 
-                       AVG(climat.temperature_moyenne) AS temperature_moyenne, 
-                       AVG(agriculture.rendement_agricole_MT_per_HA) AS rendement_agricole
-                FROM climat
-                JOIN agriculture ON climat.id_agriculture = agriculture.id_agriculture
-                JOIN pays ON agriculture.id_pays = pays.id_pays
-                WHERE climat.annee = 1990 
-                AND agriculture.annee = 1990
-                GROUP BY pays.nom
-                ORDER BY COUNT(pays.nom) DESC
-                LIMIT 15;";
 
+        // ▶️ Étape 1 : Trouver les 4 pays les plus redondants
+        $sqlTopPays = "
+            SELECT pays.nom, COUNT(*) AS occurences
+            FROM climat
+            JOIN pays ON climat.id_pays = pays.id_pays
+            GROUP BY pays.nom
+            ORDER BY occurences DESC
+            LIMIT 3;
+        ";
+        $stmtTop = $pdo->prepare($sqlTopPays);
+        $stmtTop->execute();
+        $topPays = $stmtTop->fetchAll(PDO::FETCH_COLUMN); // juste les noms
+
+        // ▶️ Étape 2 : Récupérer les températures moyennes de ces pays
+        $placeholders = str_repeat('?,', count($topPays) - 1) . '?';
+        $sql = "
+            SELECT pays.nom AS pays, climat.annee, AVG(climat.temperature_moyenne) AS temperature_moyenne
+            FROM climat
+            JOIN pays ON climat.id_pays = pays.id_pays
+            WHERE pays.nom IN ($placeholders)
+            GROUP BY pays.nom, climat.annee
+            ORDER BY climat.annee, pays.nom;
+        ";
         $stmt = $pdo->prepare($sql);
-        $stmt->execute();
+        $stmt->execute($topPays);
         $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         echo json_encode($data);
@@ -257,56 +268,62 @@ const configImpactRendement = {
     }
     ?>;
 
-    if (dataTemperatureRendement.error) {
-        console.error("Erreur SQL:", dataTemperatureRendement.error);
+    if (dataTemperature.error) {
+        console.error("Erreur SQL:", dataTemperature.error);
     } else {
-        const labelsPays = dataTemperatureRendement.map(pays => pays.nom);
-        const temperatureMoyenne = dataTemperatureRendement.map(pays => pays.temperature_moyenne);
-        const rendementAgricole = dataTemperatureRendement.map(pays => pays.rendement_agricole);
+        const annees = [...new Set(dataTemperature.map(item => item.annee))];
 
-        const configTemperatureRendement = {
-            type: "bar",
+        const paysData = {};
+        dataTemperature.forEach(item => {
+            if (!paysData[item.pays]) {
+                paysData[item.pays] = {};
+            }
+            paysData[item.pays][item.annee] = item.temperature_moyenne;
+        });
+
+        const couleurs = ["#e6194B", "#3cb44b", "#ffe119", "#4363d8"];
+
+        const datasets = Object.entries(paysData).map(([pays, donnees], index) => ({
+            label: pays,
+            data: annees.map(annee => donnees[annee] || null),
+            borderColor: couleurs[index % couleurs.length],
+            backgroundColor: couleurs[index % couleurs.length],
+            tension: 0.3,
+            fill: false
+        }));
+
+        const config = {
+            type: 'line',
             data: {
-                labels: labelsPays,
-                datasets: [
-                    {
-                        label: "Température Moyenne (°C) - 1990",
-                        data: temperatureMoyenne,
-                        backgroundColor: "rgba(54, 162, 235, 0.6)",  // Bleu
-                        borderColor: "rgba(54, 162, 235, 1)",
-                        borderWidth: 1
-                    },
-                    {
-                        label: "Rendement Agricole (MT/HA) - 1990",
-                        data: rendementAgricole,
-                        backgroundColor: "rgba(255, 159, 64, 0.6)", // Orange
-                        borderColor: "rgba(255, 159, 64, 1)",
-                        borderWidth: 1
-                    }
-                ]
+                labels: annees,
+                datasets: datasets
             },
             options: {
                 responsive: true,
                 plugins: {
-                    legend: { position: "top" }
+                    legend: { position: 'top' },
+                    title: {
+                        display: true,
+                        text: 'Évolution des températures moyennes — 3 pays les plus fréquents'
+                    }
                 },
                 scales: {
                     x: {
-                        title: { display: true, text: "Pays" },
-                        type: "category"
+                        title: { display: true, text: 'Année' }
                     },
                     y: {
-                        title: { display: true, text: "Valeurs" },
-                        beginAtZero: true
+                        title: { display: true, text: 'Température moyenne (°C)' },
+                        beginAtZero: false
                     }
                 }
             }
         };
 
-        const ctxTemperatureRendement = document.getElementById("graphTemperatureRendement").getContext("2d");
-        new Chart(ctxTemperatureRendement, configTemperatureRendement);
+        const ctx = document.getElementById("graphTemperatureRendement").getContext("2d");
+        new Chart(ctx, config);
     }
 </script>
+
 
 
 
