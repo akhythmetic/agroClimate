@@ -93,10 +93,13 @@
           <li><a href="actualites.html">Actualités</a></li>
           <li><a href="analyse.php">Analyses</a></li>
           <li><a href="illustrations.html">Visualisations</a></li>
+          <li><a href="Predictions.php">Prédictions</a></li>
           <li><a href="interviews.html">Interviews</a></li>
           <li><a href="connexion.php">Se connecter</a></li>
           <li><a href="inscription.php">S'inscrire</a></li>
+          
       </ul>
+
    </nav>
 
    <section class="main-content">
@@ -261,7 +264,7 @@
 
           //page d'analyses
           if (query === "analyse" || query === "analyses") {
-              window.location.href = "analyse.php"; 
+              window.location.href = "analyse.html"; 
           }
 
           //page d'illustrations
@@ -287,76 +290,75 @@
   fetch('getdataindex.php')
     .then(response => response.json())
     .then(data => {
+        // Vérification s'il y a une erreur
         if (data.error) {
             console.error("Erreur lors de la récupération des données : ", data.error);
             return;
         }
 
+        // Extraction des indices de santé des sols
         const indicesSanteSols = data.map(item => item.indice_sante_sols);
+
+        // Définition des noms des pays
         const pays = ['France', 'Canada', 'Nigeria', 'Argentina', 'China'];
 
+        // Création du graphique avec les données récupérées
         const ctx = document.getElementById('myChart').getContext('2d');
-
-        // Création d'un gradient pour rendre le design plus esthétique
-        const gradient = ctx.createLinearGradient(0, 0, 0, 400);
-        gradient.addColorStop(0, 'rgba(54, 162, 235, 1)');
-        gradient.addColorStop(1, 'rgba(255, 99, 132, 1)');
-
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: pays,
+                labels: pays, // Utiliser les noms des pays
                 datasets: [{
                     label: 'Indice de Santé des Sols',
                     data: indicesSanteSols,
-                    backgroundColor: gradient,
-                    borderColor: 'rgba(0, 0, 0, 0.1)',
-                    borderWidth: 1,
-                    borderRadius: 8, // Coins arrondis des barres
-                    barThickness: 40 // Épaisseur des barres
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)'
+                    ],
+                    borderWidth: 1
                 }]
             },
             options: {
                 responsive: true,
-                animation: {
-                    duration: 1500, // Animation fluide
-                    easing: 'easeInOutBounce'
-                },
                 plugins: {
                     legend: {
-                        display: false // Cacher la légende si inutile
+                        position: 'top',
+                        labels: {
+                            boxWidth: 0 // Retire complètement l'icône dans la légende
+                        }
                     },
                     tooltip: {
                         callbacks: {
                             label: function(context) {
-                                return `${context.label} : ${context.raw}`;
+                                // Récupérer le nom du pays et la valeur correspondante
+                                const pays = context.label; // Nom du pays
+                                const valeur = context.raw; // Valeur associée au bâton
+                                return `${pays} : ${valeur}`;
                             }
                         }
                     }
                 },
                 scales: {
                     y: {
-                        beginAtZero: true,
-                        ticks: {
-                            stepSize: 10, // Contrôle des pas d'échelle
-                            font: { size: 14 }
-                        }
-                    },
-                    x: {
-                        ticks: {
-                            font: { size: 14 }
-                        }
+                        beginAtZero: true
                     }
                 }
             }
         });
     })
-    .catch(error => console.error("Erreur lors du fetch des données : ", error));
+    .catch(error => console.error("Erreur lors du fetch des données : ", error))
+
 </script>
-
-<h2>Prédictions vs Valeurs Réelles</h2>
-    <img src="{{ url_for('graph') }}" alt="Graphique des prédictions" />
-
 
 </body>
 </html>
