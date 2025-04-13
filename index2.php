@@ -92,7 +92,7 @@
       <ul>
           <li><a href="actualites.html">Actualités</a></li>
           <li><a href="analyse.php">Analyses</a></li>
-          <li><a href="illustrations.html">Visualisations</a></li>
+          <li><a href="illustrations.php">Visualisations</a></li>
           <li><a href="Predictions.php">Prédictions</a></li>
           <li><a href="interviews.html">Interviews</a></li>
           <li><a href="connexion.php">Se connecter</a></li>
@@ -108,7 +108,7 @@
       <div class="aligned-section">
           <div class="buttons-section">
               <a class="button">Pourquoi c'est important ?</a>
-              <a class="button" href="illustrations.html">Visualisations</a>
+              <a class="button" href="illustrations.php">Visualisations</a>
               <a class="button" href="ourteam.html">Assistance</a>
           </div>
 
@@ -264,12 +264,12 @@
 
           //page d'analyses
           if (query === "analyse" || query === "analyses") {
-              window.location.href = "analyse.html"; 
+              window.location.href = "analyse.php"; 
           }
 
           //page d'illustrations
           if (query === "illustrations" || query === "illustration" || query === "visualisations" || query === "visualisation") {
-              window.location.href = "illustrations.html";
+              window.location.href = "illustrations.php";
           }
 
           //page de connexion
@@ -362,4 +362,3 @@
 
 </body>
 </html>
-
