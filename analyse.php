@@ -19,9 +19,9 @@
     </header>
 
     <section class="main-content">
-        <p class="intro-text-actu">IMPACT DU CLIMAT SUR L’AGRICULTURE</p>
+        <p class="intro-text-actu">Évolution des précipitations dans la région Grand Est au cours des années</p>
         <div class="aligned-section left-align">
-            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
+            <p>Ce graphique montre l'évolution des précipitations annuelles sur plusieurs décennies dans la région Grand Est en France. On observe une forte variabilité d'une année à l'autre, sans tendance claire à l'augmentation ou à la diminution. Certains pics de précipitations indiquent des années exceptionnellement humides, tandis que des creux marquent des périodes de sécheresse relative. Cette instabilité climatique peut avoir un impact direct sur l'agriculture et la disponibilité des ressources en eau.</p>
             <canvas id="graphImpactClimat" class="content-graph"></canvas>
         </div>
         </section>
@@ -91,7 +91,7 @@
 
 <section class="main-content">
         <!-- Titre et deuxième paragraphe à droite avec image à gauche -->
-        <p class="intro-text-actu">RENDEMENT AGRICOLE ET STRATÉGIES D’ADAPTATION</p>
+        <p class="intro-text-actu">L'IMPACT DE L'ÉCONOMIE SUR LE RENDEMENT AGRICOLE</p>
         <div class="aligned-section right-align">
             <canvas id="graphImpactRendement" class="content-graph"></canvas>
             <p>Ce nuage de points met en relation l'impact économique et le rendement agricole en tonnes par hectare (MT/HA). On remarque une certaine corrélation positive : à mesure que l'impact économique augmente, le rendement agricole tend à être plus élevé. Cela pourrait indiquer que des investissements accrus dans les stratégies d'adaptation ou dans les infrastructures agricoles permettent d'améliorer la productivité des cultures.</p>
@@ -168,7 +168,7 @@ const configImpactRendement = {
             tooltip: {
                 callbacks: {
                     label: function(context) {
-                        return `${context.dataset.data[context.dataIndex].label}: ${context.formattedValue}`;
+                        return ${context.dataset.data[context.dataIndex].label}: ${context.formattedValue};
                     }
                 }
             },
@@ -210,22 +210,22 @@ const configImpactRendement = {
         new Chart(ctxImpactRendement, configImpactRendement);
     }
 </script>
-
+</section>
         
         
-
+<section class="main-content">
         <!-- Titre et troisième paragraphe à droite avec image à gauche -->
         <p class="intro-text-actu">TEMPÉRATURES MOYENNES PAR CULTURE ET ANNÉE</p>
         <div class="aligned-section left-align">
             <p>Le graphique illustre l’évolution des températures moyennes entre 1990 et 2024 pour l’Australie, la Chine et le Nigeria, trois pays parmi les plus représentés dans les données. On observe une forte variabilité, notamment en Australie, avec des pics dépassant les 22°C autour de 2019, période marquée par des sécheresses extrêmes affectant gravement les récoltes. En Chine, bien que les températures soient plus modérées, des fluctuations accrues après les années 2000 rendent les saisons agricoles moins prévisibles, perturbant les rendements. Le Nigeria, quant à lui, connaît des variations soudaines qui fragilisent l’agriculture locale, souvent dépendante des conditions climatiques stables. Globalement, cette instabilité thermique nuit à la planification agricole, réduit la productivité et accroît les risques de pertes de récoltes. Ainsi, l’élévation des températures et leur irrégularité ont un impact direct et négatif sur le rendement agricole dans ces régions.</p>
-            <canvas id="graphTempCultures" class="content-graph"></canvas>
+            <canvas id="graphTemperatureRendement" class="content-graph"></canvas>
         </div>
 
 
         
 
        <!-- CANVAS -->
-<canvas id="graphTemperatureRendement" class="content-graph"></canvas>
+
 
 <!-- CHART.JS -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -324,10 +324,6 @@ const configImpactRendement = {
     }
 </script>
 
-
-
-
-
         
         
 
@@ -335,13 +331,12 @@ const configImpactRendement = {
         <!-- Titre et quatrième paragraphe à gauche avec image à droite -->
         <p class="intro-text-actu">ÉVOLUTION DES ÉMISSIONS DE CO2</p>
         <div class="aligned-section left-align">
-            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans différents pays 
-                 étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
-            <canvas id="graphCO2" class="content-graph"></canvas>
+        <canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
+            <p>Cette courbe illustre l’évolution des émissions de dioxyde de carbone (CO2) directement attribuables aux activités agricoles dans les principales régions étudiées. Ces émissions incluent des sources telles que l’utilisation de machines agricoles, les procédés de fertilisation chimique, l’élevage intensif, et la gestion des sols. En montrant les variations des niveaux de CO2 au fil des années, elle met en lumière non seulement l’impact des pratiques agricoles actuelles sur l’environnement, mais également les progrès réalisés dans certaines zones pour réduire cette empreinte écologique.</p>
         </div>
        
         <!-- QUATRIÈME GRAPHE -->
-<canvas id="graphEmissionsCO2Moyenne" class="content-graph"></canvas>
+
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const dataEmissionsCO2Moyenne = <?php  
