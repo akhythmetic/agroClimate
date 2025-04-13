@@ -61,9 +61,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['ready'])) {
     $year = intval($_POST['annee']);
     $type_culture = escapeshellarg(trim($_POST['type_culture']));
 
-    $script = "C:\\MAMP\\htdocs\\Gestiondeprojets\\predict_eco.py";
-    $python = "C:\\Users\\rmaze\\AppData\\Local\\Programs\\Python\\Python310\\python.exe";
-    $command = "\"$python\" \"$script\" $year $type_culture";
+    $script = __DIR__ . "/predict_eco.py";
+    $python = "python"; 
+    $command = escapeshellcmd("$python \"$script\" $year $type_culture");
+
 
     $output = shell_exec("$command 2>&1");
 
